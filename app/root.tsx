@@ -1,5 +1,6 @@
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
@@ -34,6 +35,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <header className="flex justify-between items-center p-4">
+          <h1 className="text-2xl font-bold">UltimateX</h1>
+          <nav>
+            <Link to="/hot">Hot</Link>
+          </nav>
+        </header>
         {children}
         <ScrollRestoration />
         <Scripts />
