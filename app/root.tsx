@@ -1,6 +1,5 @@
 import {
 	isRouteErrorResponse,
-	Link,
 	Links,
 	Meta,
 	Outlet,
@@ -13,6 +12,39 @@ import stylesheet from "./app.css?url";
 
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
 import { AppSidebar } from "~/components/native/app-sidebar";
+
+import {
+	ApolloClient,
+	InMemoryCache,
+	ApolloProvider,
+	concat,
+	HttpLink,
+	ApolloLink,
+} from "@apollo/client/index";
+import { useEffect, useState } from "react";
+import { CREATE_GUEST_TOKEN_QUERY } from "./queries/users";
+import { Loading } from "./components/native/loading";
+
+const httpLink = new HttpLink({ uri: import.meta.env.VITE_API_URL });
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+	// add the authorization to the headers
+	operation.setContext(({ headers = {} }) => ({
+		headers: {
+			...headers,
+			Authorization: localStorage.getItem("token")
+				? `Bearer ${localStorage.getItem("token")}`
+				: null,
+		},
+	}));
+
+	return forward(operation);
+});
+
+const client = new ApolloClient({
+	cache: new InMemoryCache(),
+	link: concat(authMiddleware, httpLink),
+});
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -58,7 +90,37 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	return <Outlet />;
+	const [token, setToken] = useState<string | null>(
+		window.localStorage.getItem("token")
+	);
+
+	useEffect(() => {
+		const fetchToken = async () => {
+			const data = await client.query({
+				query: CREATE_GUEST_TOKEN_QUERY,
+				variables: {
+					networkDomain: import.meta.env.VITE_NETWORK_DOMAIN,
+				},
+			});
+
+			if (data) {
+				window.localStorage.setItem(
+					"token",
+					data.data.tokens.accessToken
+				);
+				client.resetStore();
+				setToken(data.data.tokens.accessToken);
+			}
+		};
+
+		if (!token) fetchToken();
+	}, [token]);
+
+	return (
+		<ApolloProvider client={client}>
+			{!token ? <Loading /> : <Outlet />}
+		</ApolloProvider>
+	);
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
