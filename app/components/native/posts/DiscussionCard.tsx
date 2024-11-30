@@ -16,6 +16,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "~/components/ui/dialog";
+import ShareDialog from "../dialogs/share-dialog";
 
 export default function DiscussionCard({ post }: { post: Post }) {
 	const { toast } = useToast();
@@ -81,14 +82,7 @@ export default function DiscussionCard({ post }: { post: Post }) {
 					<DialogTrigger>
 						<Send className="w-4 h-4" />
 					</DialogTrigger>
-					<DialogContent>
-						<DialogHeader>
-							<DialogTitle>Share post</DialogTitle>
-							<DialogDescription>
-								Share this post with your friends
-							</DialogDescription>
-						</DialogHeader>
-					</DialogContent>
+					<ShareDialog url={post.url ?? ""} />
 				</Dialog>
 			</footer>
 		</div>
