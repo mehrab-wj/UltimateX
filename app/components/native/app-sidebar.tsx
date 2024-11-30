@@ -1,5 +1,5 @@
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 
 import {
 	Sidebar,
@@ -65,16 +65,16 @@ export function AppSidebar() {
 					</div>
 					<button className="mt-5 border border-gray-200 p-2 rounded-xl relative overflow-hidden">
 						Login
-					</button>	
+					</button>
 					<SidebarGroupContent className="mt-5 pt-3 border-t border-gray-200">
 						<SidebarMenu>
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton className="" asChild>
-										<Link to={item.url}>
+										<NavLink to={item.url}>
 											<item.icon />
 											<span>{item.title}</span>
-										</Link>
+										</NavLink>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
