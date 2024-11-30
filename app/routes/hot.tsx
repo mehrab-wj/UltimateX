@@ -7,7 +7,6 @@ import { Input } from "~/components/ui/input";
 import { Search } from "lucide-react";
 import SmallPostCard from "~/components/native/cards/SmallPostCard";
 import { Link } from "react-router";
-import UserCard from "~/components/native/cards/UserCard";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -226,56 +225,7 @@ export default function Hot() {
 						</div>
 					</div>
 
-					<div className="mt-4 border-t border-zinc-200 pt-3">
-						<h5 className="text-[16px] font-bold">
-							Recommended Follows
-						</h5>
-
-						<div className="grid grid-cols-1 mt-2">
-						<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-								<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</>
