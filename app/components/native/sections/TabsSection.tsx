@@ -25,7 +25,7 @@ const TabsSection: FC<TabsSectionProps> = ({
 }) => {
 	return (
 		<Tabs defaultValue={defaultValue} className={cn("w-full", className)}>
-			<TabsList className="grid w-full grid-cols-3">
+			<TabsList className="grid w-full grid-cols-2">
 				{tabsList.map((tab) => (
 					<TabsTrigger key={tab.value} value={tab.value}>
 						{tab.title}

@@ -45,10 +45,6 @@ export default function Home() {
 								title: "Trending",
 								value: "trending",
 							},
-							{
-								title: "Following",
-								value: "following",
-							},
 						]}
 					>
 						<TabsContent value="home">
@@ -110,9 +106,6 @@ export default function Home() {
 						</TabsContent>
 						<TabsContent value="trending">
 							<div>Trending</div>
-						</TabsContent>
-						<TabsContent value="following">
-							<div>Following</div>
 						</TabsContent>
 					</TabsSection>
 				</div>
