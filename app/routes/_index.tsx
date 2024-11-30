@@ -1,6 +1,5 @@
 import type { Route } from "./+types/_index";
 import TabsSection from "~/components/native/sections/TabsSection";
-import TrendPostCard from "~/components/native/cards/TrendPostCard";
 import PostCard from "~/components/native/cards/PostCard";
 import { Input } from "~/components/ui/input";
 import { Search } from "lucide-react";
@@ -12,6 +11,7 @@ import { GET_POSTS_QUERY } from "~/queries/posts";
 import { Loading } from "~/components/native/loading";
 import { GET_TOP_MEMBERS_QUERY } from "~/queries/members";
 import LatestUsers from "~/components/native/users/latest-users";
+import Events from "~/components/events/Events";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -53,11 +53,11 @@ export default function Home() {
 						</label>
 					</div>
 					<TabsSection
-						defaultValue="for-you"
+						defaultValue="home"
 						tabsList={[
 							{
-								title: "For You",
-								value: "for-you",
+								title: "Home",
+								value: "home",
 							},
 							{
 								title: "Trending",
@@ -69,31 +69,8 @@ export default function Home() {
 							},
 						]}
 					>
-						<TabsContent value="for-you">
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-5">
-								<TrendPostCard
-									user={{
-										imgSrc: "/img/profile.png",
-										name: "Mehrab H",
-									}}
-									trending="Trending #1"
-									title="The 10-year-old Medium story that turned into a book deal"
-									description="Getting a book deal on a story you first published a decade ago feels even more magical."
-									category={{ title: "Fashion", url: "#" }}
-									href="/"
-								/>
-								<TrendPostCard
-									user={{
-										imgSrc: "/img/profile.png",
-										name: "Mehrab H",
-									}}
-									trending="Trending #1"
-									title="The 10-year-old Medium story that turned into a book deal"
-									description="Getting a book deal on a story you first published a decade ago feels even more magical."
-									category={{ title: "Fashion", url: "#" }}
-									href="/"
-								/>
-							</div>
+						<TabsContent value="home">
+							<Events />
 							<div className="grid grid-cols-1 mt-4">
 								<PostCard
 									user={{
