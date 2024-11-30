@@ -11,6 +11,8 @@ import { TabsContent } from "~/components/ui/tabs";
 import { gql, useQuery } from "@apollo/client/index";
 import { GET_POSTS_QUERY } from "~/queries/posts";
 import { Loading } from "~/components/native/loading";
+import { GET_TOP_MEMBERS_QUERY } from "~/queries/members";
+import LatestUsers from "~/components/native/users/latest-users";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -25,19 +27,17 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
 	// const context = useOutletContext();
 
-	const { loading, error, data } = useQuery(GET_POSTS_QUERY, {
-		variables: {
-			limit: 10,
-			orderByString: "reactionsCount",
-			reverse: true,
-			filterBy: [],
-		},
-	});
+	// const { loading, error, data } = useQuery(GET_POSTS_QUERY, {
+	// 	variables: {
+	// 		limit: 10,
+	// 		orderByString: "reactionsCount",
+	// 		reverse: true,
+	// 		filterBy: [],
+	// 	},
+	// });
 
-	if (loading) return <Loading />;
-	if (error) return <p>GQL Error : {error.message}</p>;
-
-	console.log(data);
+	// if (loading) return <Loading />;
+	// if (error) return <p>GQL Error : {error.message}</p>;
 
 	return (
 		<>
@@ -239,65 +239,10 @@ export default function Home() {
 									</li>
 								))}
 							</ul>
-							<Link
-								to="/"
-								className="text-[12px] text-zinc-800 mt-2 underline hover:text-black"
-							>
-								See all categories
-							</Link>
 						</div>
 					</div>
 
-					<div className="mt-4 border-t border-zinc-200 pt-3">
-						<h5 className="text-[16px] font-bold">
-							Recommended Follows
-						</h5>
-
-						<div className="grid grid-cols-1 mt-2">
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-							<UserCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-									id: 1,
-								}}
-							/>
-						</div>
-					</div>
+					<LatestUsers />
 				</div>
 			</div>
 		</>

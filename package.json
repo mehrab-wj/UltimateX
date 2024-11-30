@@ -7,7 +7,9 @@
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "shadcn": "pnpm dlx shadcn@latest add",
-    "typecheck": "react-router typegen && tsc --build --noEmit"
+    "typecheck": "react-router typegen && tsc --build --noEmit",
+    "compile": "graphql-codegen",
+    "watch": "graphql-codegen -w"
   },
   "dependencies": {
     "@apollo/client": "^3.11.10",
@@ -21,7 +23,6 @@
     "@react-router/serve": "^7.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "graphql": "^16.9.0",
     "isbot": "^5.1.17",
     "lucide-react": "^0.462.0",
     "react": "^18.3.1",
@@ -31,14 +32,18 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/client-preset": "^4.5.1",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@react-router/dev": "^7.0.1",
     "@types/node": "^20.17.9",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
+    "graphql": "^16.9.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
-    "typescript": "^5.6.3",
+    "typescript": "^5.7.2",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.2"
   }

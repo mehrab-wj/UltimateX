@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client/index";
+import { gql } from '~/__generated__/gql';
 
-export const GET_POSTS_QUERY = gql`
+export const GET_POSTS_QUERY = gql(/* GraphQL */`
 query GetPosts($after: String, $before: String, $excludePins: Boolean, $filterBy: [PostListFilterByInput!], $limit: Int!, $offset: Int, $orderBy: PostListOrderByEnum, $orderByString: String, $postTypeIds: [String!], $reverse: Boolean, $spaceIds: [ID!], $query: String) {
   posts(
     after: $after
@@ -682,4 +682,4 @@ query GetPosts($after: String, $before: String, $excludePins: Boolean, $filterBy
     }
   }
 }
-`;
+`);
