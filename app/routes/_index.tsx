@@ -6,10 +6,6 @@ import { Search } from "lucide-react";
 import SmallPostCard from "~/components/native/cards/SmallPostCard";
 import { Link } from "react-router";
 import { TabsContent } from "~/components/ui/tabs";
-import { gql, useQuery } from "@apollo/client/index";
-import { GET_POSTS_QUERY } from "~/queries/posts";
-import { Loading } from "~/components/native/loading";
-import { GET_TOP_MEMBERS_QUERY } from "~/queries/members";
 import LatestUsers from "~/components/native/users/latest-users";
 import Events from "~/components/events/Events";
 
@@ -24,20 +20,6 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-	// const context = useOutletContext();
-
-	// const { loading, error, data } = useQuery(GET_POSTS_QUERY, {
-	// 	variables: {
-	// 		limit: 10,
-	// 		orderByString: "reactionsCount",
-	// 		reverse: true,
-	// 		filterBy: [],
-	// 	},
-	// });
-
-	// if (loading) return <Loading />;
-	// if (error) return <p>GQL Error : {error.message}</p>;
-
 	return (
 		<>
 			<div className="lg:flex lg:flex-wrap">

@@ -98,8 +98,13 @@ body {
 	}
 }
 
-/* Daisy UI Loading */
+.post-content {
+	img {
+		@apply w-full rounded-lg ;
+	}
+}
 
+/* Daisy UI Loading */
 .loading {
     pointer-events: none;
     display: inline-block;

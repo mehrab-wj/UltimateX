@@ -24,6 +24,7 @@ import {
 import { useEffect, useState } from "react";
 import { CREATE_GUEST_TOKEN_QUERY } from "./queries/users";
 import { Loading } from "./components/native/loading";
+import { Toaster } from "./components/ui/toaster";
 
 const httpLink = new HttpLink({ uri: import.meta.env.VITE_API_URL });
 
@@ -80,6 +81,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 							<SidebarTrigger className="lg:hidden w-[40px] h-[40px] ml-2 scale-150 mt-2" />
 						</header>
 						{children}
+						<Toaster />
 					</main>
 				</SidebarProvider>
 				<ScrollRestoration />

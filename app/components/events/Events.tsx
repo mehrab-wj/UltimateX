@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client/index";
 import EventCard from "../native/posts/EventCard";
 import { Post, PostListFilterByOperator } from "~/__generated__/graphql";
 import { Skeleton } from "../ui/skeleton";
-import { getPostLocation, getThumbnail, getPostDate } from "~/lib/post-helpers";
+import { getPostLocation, getThumbnail, getEventDate } from "~/lib/post-helpers";
 
 export default function Events() {
 	const { loading, error, data } = useQuery(GET_POSTS_QUERY, {
@@ -43,7 +43,7 @@ export default function Events() {
 							post.owner?.member?.name ??
 							"",
 					}}
-					trending={getPostDate(post as Post) ?? "Upcoming event"}
+					trending={getEventDate(post as Post) ?? "Upcoming event"}
 					title={post.title!}
 					description={post.description ?? ""}
 					location={getPostLocation(post as Post)}

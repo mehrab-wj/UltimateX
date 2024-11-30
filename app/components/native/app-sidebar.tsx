@@ -17,27 +17,27 @@ export function AppSidebar() {
 	const items = [
 		{
 			title: "Home",
-			url: "#",
+			url: "/",
 			icon: Home,
 		},
 		{
-			title: "Inbox",
-			url: "#",
+			title: "Discussion",
+			url: "/discussions",
 			icon: Inbox,
 		},
 		{
-			title: "Calendar",
-			url: "#",
+			title: "Events",
+			url: "/events",
 			icon: Calendar,
 		},
 		{
-			title: "Search",
-			url: "#",
+			title: "Notifications",
+			url: "/notifications",
 			icon: Search,
 		},
 		{
 			title: "Settings",
-			url: "#",
+			url: "/settings",
 			icon: Settings,
 		},
 	];
@@ -49,7 +49,7 @@ export function AppSidebar() {
 					<SidebarGroupLabel className="text-2xl font-bold">
 						Ultimate<span className="text-primary">X</span>
 					</SidebarGroupLabel>
-					<div className="flex gap-3 mt-5 border border-gray-200 p-2 rounded-xl relative overflow-hidden">
+					<div className="hidden -flex gap-3 mt-5 border border-gray-200 p-2 rounded-xl relative overflow-hidden">
 						<img
 							className="w-[40px] h-[40px] rounded-full"
 							src="/img/profile.png"
@@ -61,17 +61,20 @@ export function AppSidebar() {
 								thisismehrab@gmail.com
 							</span>
 						</div>
-                        <Link to="/profile" className="absolute inset-0 z-10" />
+						<Link to="/profile" className="absolute inset-0 z-10" />
 					</div>
+					<button className="mt-5 border border-gray-200 p-2 rounded-xl relative overflow-hidden">
+						Login
+					</button>	
 					<SidebarGroupContent className="mt-5 pt-3 border-t border-gray-200">
 						<SidebarMenu>
 							{items.map((item) => (
 								<SidebarMenuItem key={item.title}>
 									<SidebarMenuButton className="" asChild>
-										<a href={item.url}>
+										<Link to={item.url}>
 											<item.icon />
 											<span>{item.title}</span>
-										</a>
+										</Link>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
