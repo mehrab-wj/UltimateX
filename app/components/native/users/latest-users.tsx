@@ -21,6 +21,7 @@ export default function LatestUsers() {
 			<div className="grid grid-cols-1 mt-2">
 				{data.members.edges?.map(({ node: user }) => (
 					<UserCard
+						key={user.id}
 						user={{
 							id: user.id,
 							imgSrc:

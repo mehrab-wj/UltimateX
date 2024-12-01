@@ -3,7 +3,11 @@ import { useQuery } from "@apollo/client/index";
 import EventCard from "../native/posts/EventCard";
 import { Post, PostListFilterByOperator } from "~/__generated__/graphql";
 import { Skeleton } from "../ui/skeleton";
-import { getPostLocation, getThumbnail, getEventDate } from "~/lib/post-helpers";
+import {
+	getPostLocation,
+	getThumbnail,
+	getEventDate,
+} from "~/lib/post-helpers";
 
 export default function Events() {
 	const { loading, error, data } = useQuery(GET_POSTS_QUERY, {
@@ -31,6 +35,7 @@ export default function Events() {
 		<div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-5">
 			{data.posts.nodes?.map((post) => (
 				<EventCard
+					key={post.id}
 					thumbnail={getThumbnail(post as Post)}
 					user={{
 						imgSrc:
