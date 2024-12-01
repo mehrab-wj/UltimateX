@@ -2,9 +2,9 @@ import type { Route } from "./+types/_index";
 import { Input } from "~/components/ui/input";
 import { Search } from "lucide-react";
 import { GET_POSTS_QUERY } from "~/queries/posts";
-import DiscussionCard from "~/components/native/posts/DiscussionCard";
 import { Post } from "~/__generated__/graphql";
 import { useQuery } from "@apollo/client/index";
+import { PostFactory } from "~/components/posts/PostFactory";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -41,10 +41,10 @@ export default function Discussions() {
 	);
 }
 
-function DiscussionsList() {
+function DiscussionsList({ limit = 5 }: { limit?: number }) {
 	const { loading, error, data } = useQuery(GET_POSTS_QUERY, {
 		variables: {
-			limit: 5,
+			limit,
 			spaceIds: ["1Vtk2k8bMUMi"],
 			postTypeIds: ["x8jlZUWAsvWkU6Q"],
 			orderByString: "publishedAt",
@@ -59,13 +59,20 @@ function DiscussionsList() {
 
 	return (
 		<div className="grid grid-cols-1 gap-4">
-			{data.posts.nodes?.map((post) => (
-				<DiscussionCard post={post as Post} />
+			{data.posts.nodes?.map((post, i) => (
+				<PostFactory key={i} post={post as Post} />
 			))}
 		</div>
 	);
 }
 
 function LoadingState() {
-	return <div>Loading...</div>;
+	return (
+		<div className="grid grid-cols-1 gap-4">
+			<PostFactory post={undefined} view="Discussion" />
+			<PostFactory post={undefined} view="Discussion" />
+			<PostFactory post={undefined} view="Discussion" />
+			<PostFactory post={undefined} view="Discussion" />
+		</div>
+	);
 }

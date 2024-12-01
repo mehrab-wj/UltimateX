@@ -8,17 +8,17 @@ import {
 	getDiscussionContent,
 } from "~/lib/post-helpers";
 
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "~/components/ui/dialog";
-import ShareDialog from "../dialogs/share-dialog";
+import { Dialog, DialogTrigger } from "~/components/ui/dialog";
+import ShareDialog from "~/components/native/dialogs/share-dialog";
+import { Skeleton } from "~/components/ui/skeleton";
 
-export default function DiscussionCard({ post }: { post: Post }) {
+export default function DiscussionCard({ post }: { post: Post | undefined }) {
+	if (!post) return <DiscussionSkleton />;
+
+	return <DiscussionCardElement post={post} />;
+}
+
+export function DiscussionCardElement({ post }: { post: Post }) {
 	const { toast } = useToast();
 	return (
 		<div className="p-4 border rounded-xl border-zinc-200">
@@ -85,6 +85,35 @@ export default function DiscussionCard({ post }: { post: Post }) {
 					<ShareDialog url={post.url ?? ""} />
 				</Dialog>
 			</footer>
+		</div>
+	);
+}
+
+export function DiscussionSkleton() {
+	return (
+		<div className="grid grid-cols-1 gap-4">
+			<div className="p-4 border rounded-xl border-zinc-200">
+				<header className="flex items-center gap-2">
+					<Skeleton className="w-[40px] h-[40px] rounded-full" />
+					<div className="flex flex-col gap-1">
+						<Skeleton className="h-4 w-24" />
+						<Skeleton className="h-3 w-10" />
+					</div>
+				</header>
+
+				{/* Metadata skeleton (date, author, etc) */}
+				<div className="block mt-4">
+					<div className="space-y-2">
+						<Skeleton className="h-4 w-full" />
+						<Skeleton className="h-4 w-5/6" />
+						<Skeleton className="h-4 w-4/6" />
+					</div>
+				</div>
+
+				<footer className="flex items-center gap-2 mt-4">
+					<Skeleton className="h-4 w-1/6" />
+				</footer>
+			</div>
 		</div>
 	);
 }
