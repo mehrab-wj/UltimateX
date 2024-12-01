@@ -1,11 +1,11 @@
 import type { Route } from "./+types/_index";
-import { Input } from "~/components/ui/input";
-import { Search } from "lucide-react";
 import { GET_POSTS_QUERY } from "~/queries/posts";
 import { Post } from "~/__generated__/graphql";
 import { useQuery } from "@apollo/client/index";
 import { PostFactory } from "~/components/posts/PostFactory";
 import SidebarContent from "~/components/native/sidebar/SidebarContent";
+import SearchArea from "~/components/native/SearchArea";
+
 export function meta({}: Route.MetaArgs) {
 	return [
 		{ title: "UltimateX - Discussions" },
@@ -16,21 +16,12 @@ export function meta({}: Route.MetaArgs) {
 	];
 }
 
-export default function Discussions() {
+export default function DiscussionsPage() {
 	return (
 		<>
 			<div className="lg:flex lg:flex-wrap">
 				<div className="lg:w-[70%] p-5">
-					<div className="w-full relative">
-						<Input
-							placeholder="Search News"
-							className="shadow-none rounded-full !text-[12px] pl-9"
-							id="search"
-						/>
-						<label htmlFor="search">
-							<Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-[15px] h-[15px]" />
-						</label>
-					</div>
+					<SearchArea />
 
 					<section className="mt-5">
 						<DiscussionsList />

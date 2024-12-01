@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { TabsContent } from "~/components/ui/tabs";
 import EventsGallery from "~/components/events/EventsGallery";
 import SidebarContent from "~/components/native/sidebar/SidebarContent";
+import SearchArea from "~/components/native/SearchArea";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -22,16 +23,8 @@ export default function Home() {
 		<>
 			<div className="lg:flex lg:flex-wrap">
 				<div className="lg:w-[70%] p-5">
-					<div className="w-full relative">
-						<Input
-							placeholder="Search News"
-							className="shadow-none rounded-full !text-[12px] pl-9"
-							id="search"
-						/>
-						<label htmlFor="search">
-							<Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-[15px] h-[15px]" />
-						</label>
-					</div>
+					<SearchArea />
+					
 					<TabsSection
 						defaultValue="home"
 						tabsList={[
