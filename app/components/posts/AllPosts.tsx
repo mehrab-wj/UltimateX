@@ -20,10 +20,11 @@ export default function AllPosts({
 		notifyOnNetworkStatusChange: true,
 	});
 
-	if (error) return <p>GQL Error : {error.message}</p>;
-	if (!data || data?.posts.totalCount === 0) return null;
 	if ((loading && !data) || data?.posts.totalCount === 0)
 		return <LoadingState />;
+
+	if (error) return <p>GQL Error : {error.message}</p>;
+	if (!data || data?.posts.totalCount === 0) return null;
 
 	return (
 		<div className="grid grid-cols-1 gap-5 mt-4">
