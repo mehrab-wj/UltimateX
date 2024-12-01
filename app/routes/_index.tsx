@@ -1,13 +1,11 @@
 import type { Route } from "./+types/_index";
 import TabsSection from "~/components/native/sections/TabsSection";
-import PostCard from "~/components/native/cards/PostCard";
-import { Input } from "~/components/ui/input";
-import { Search } from "lucide-react";
 import { TabsContent } from "~/components/ui/tabs";
 import EventsGallery from "~/components/events/EventsGallery";
 import SidebarContent from "~/components/native/sidebar/SidebarContent";
 import SearchArea from "~/components/native/SearchArea";
 import AllPosts from "~/components/posts/AllPosts";
+import { PostListOrderByEnum, TagsOrderByEnum } from "~/__generated__/graphql";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -45,7 +43,7 @@ export default function Home() {
 							<AllPosts />
 						</TabsContent>
 						<TabsContent value="trending">
-							<div>Trending</div>
+							<AllPosts orderBy={PostListOrderByEnum.ReactionsCount} />
 						</TabsContent>
 					</TabsSection>
 				</div>

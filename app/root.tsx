@@ -25,6 +25,7 @@ import { useEffect, useState } from "react";
 import { CREATE_GUEST_TOKEN_QUERY } from "./queries/users";
 import { Loading } from "./components/native/loading";
 import { Toaster } from "./components/ui/toaster";
+import { concatPagination } from "@apollo/client/utilities";
 
 const httpLink = new HttpLink({ uri: import.meta.env.VITE_API_URL });
 
@@ -42,8 +43,36 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 	return forward(operation);
 });
 
+const cache = new InMemoryCache({
+	typePolicies: {
+		Query: {
+			fields: {
+				posts: {
+					keyArgs: [
+						"spaceIds",
+						"postTypeIds",
+						"query",
+						"filterBy",
+						"orderByString",
+					],
+					merge(existing, incoming, { args }) {
+						if (!existing) return incoming;
+						if (!incoming) return existing;
+
+						return {
+							...incoming,
+							nodes: [...existing.nodes, ...incoming.nodes],
+							pageInfo: incoming.pageInfo,
+						};
+					},
+				},
+			},
+		},
+	},
+});
+
 const client = new ApolloClient({
-	cache: new InMemoryCache(),
+	cache,
 	link: concat(authMiddleware, httpLink),
 });
 
@@ -59,8 +88,8 @@ export const links: Route.LinksFunction = () => [
 		href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
 	},
 	{
-		rel: 'icon',
-		href: '/ultimate-x-logo.png'
+		rel: "icon",
+		href: "/ultimate-x-logo.png",
 	},
 	{ rel: "stylesheet", href: stylesheet },
 ];
