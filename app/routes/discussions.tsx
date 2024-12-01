@@ -5,7 +5,7 @@ import { GET_POSTS_QUERY } from "~/queries/posts";
 import { Post } from "~/__generated__/graphql";
 import { useQuery } from "@apollo/client/index";
 import { PostFactory } from "~/components/posts/PostFactory";
-
+import SidebarContent from "~/components/native/sidebar/SidebarContent";
 export function meta({}: Route.MetaArgs) {
 	return [
 		{ title: "UltimateX - Discussions" },
@@ -35,6 +35,9 @@ export default function Discussions() {
 					<section className="mt-5">
 						<DiscussionsList />
 					</section>
+				</div>
+				<div className="w-[30%] lg:block hidden h-[100vh] sticky top-0 p-4 border-l border-zinc-200 overflow-x-hidden overflow-y-auto">
+					<SidebarContent />
 				</div>
 			</div>
 		</>

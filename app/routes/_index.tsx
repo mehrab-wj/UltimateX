@@ -3,11 +3,9 @@ import TabsSection from "~/components/native/sections/TabsSection";
 import PostCard from "~/components/native/cards/PostCard";
 import { Input } from "~/components/ui/input";
 import { Search } from "lucide-react";
-import SmallPostCard from "~/components/native/cards/SmallPostCard";
-import { Link } from "react-router";
 import { TabsContent } from "~/components/ui/tabs";
-import LatestUsers from "~/components/native/users/latest-users";
 import EventsGallery from "~/components/events/EventsGallery";
+import SidebarContent from "~/components/native/sidebar/SidebarContent";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -111,38 +109,7 @@ export default function Home() {
 				</div>
 
 				<div className="w-[30%] lg:block hidden h-[100vh] sticky top-0 p-4 border-l border-zinc-200 overflow-x-hidden overflow-y-auto">
-					<div>
-						<h5 className="text-[16px] font-bold">Curated Picks</h5>
-
-						<div className="grid grid-cols-1 mt-2">
-							<SmallPostCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-								}}
-								title="The 10-year-old Medium story that turned into a book deal"
-								category={{ title: "Fashion", url: "#" }}
-								href="/"
-								date="2024-01-01"
-								readTime="15 min"
-								save={true}
-							/>
-							<SmallPostCard
-								user={{
-									imgSrc: "/img/profile.png",
-									name: "Mehrab H",
-								}}
-								title="The 10-year-old Medium story that turned into a book deal"
-								category={{ title: "Fashion", url: "#" }}
-								href="/"
-								date="2024-01-01"
-								readTime="15 min"
-								save={false}
-							/>
-						</div>
-					</div>
-
-					<LatestUsers />
+					<SidebarContent />
 				</div>
 			</div>
 		</>
