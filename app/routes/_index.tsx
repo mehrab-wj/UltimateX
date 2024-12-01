@@ -7,7 +7,7 @@ import SmallPostCard from "~/components/native/cards/SmallPostCard";
 import { Link } from "react-router";
 import { TabsContent } from "~/components/ui/tabs";
 import LatestUsers from "~/components/native/users/latest-users";
-import Events from "~/components/events/Events";
+import EventsGallery from "~/components/events/EventsGallery";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -48,7 +48,7 @@ export default function Home() {
 						]}
 					>
 						<TabsContent value="home">
-							<Events />
+							<EventsGallery />
 							<div className="grid grid-cols-1 mt-4">
 								<PostCard
 									user={{
@@ -139,57 +139,6 @@ export default function Home() {
 								readTime="15 min"
 								save={false}
 							/>
-						</div>
-					</div>
-
-					<div className="mt-4">
-						<h5 className="text-[16px] font-bold">Categories</h5>
-
-						<div className="grid grid-cols-1 mt-2">
-							<ul>
-								{[
-									{
-										title: "Fashion",
-										url: "#",
-									},
-									{
-										title: "Sport",
-										url: "#",
-									},
-									{
-										title: "Travel",
-										url: "#",
-									},
-									{
-										title: "Food",
-										url: "#",
-									},
-									{
-										title: "Tech",
-										url: "#",
-									},
-									{
-										title: "Design",
-										url: "#",
-									},
-									{
-										title: "Art",
-										url: "#",
-									},
-								].map((item, index) => (
-									<li
-										key={index}
-										className="inline-block mr-2 my-2"
-									>
-										<Link
-											to={item.url}
-											className="border border-gray-200 font-bold py-1 px-3 rounded-2xl text-[13px]"
-										>
-											{item.title}
-										</Link>
-									</li>
-								))}
-							</ul>
 						</div>
 					</div>
 

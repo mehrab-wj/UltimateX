@@ -1,13 +1,7 @@
 import { GET_POSTS_QUERY } from "~/queries/posts";
 import { useQuery } from "@apollo/client/index";
-import EventCard from "../native/posts/EventCard";
 import { Post, PostListFilterByOperator } from "~/__generated__/graphql";
-import { Skeleton } from "../ui/skeleton";
-import {
-	getPostLocation,
-	getThumbnail,
-	getEventDate,
-} from "~/lib/post-helpers";
+import { PostFactory } from "../posts/PostFactory";
 
 export default function Events() {
 	const { loading, error, data } = useQuery(GET_POSTS_QUERY, {
@@ -34,26 +28,7 @@ export default function Events() {
 	return (
 		<div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-5">
 			{data.posts.nodes?.map((post) => (
-				<EventCard
-					key={post.id}
-					thumbnail={getThumbnail(post as Post)}
-					user={{
-						imgSrc:
-							post.owner?.member?.profilePicture?.__typename ==
-							"Image"
-								? post.owner.member.profilePicture.url
-								: "",
-						name:
-							post.owner?.member?.displayName ??
-							post.owner?.member?.name ??
-							"",
-					}}
-					trending={getEventDate(post as Post) ?? "Upcoming event"}
-					title={post.title!}
-					description={post.description ?? ""}
-					location={getPostLocation(post as Post)}
-					href="/"
-				/>
+				<PostFactory key={post.id} post={post as Post} />
 			))}
 		</div>
 	);
@@ -62,8 +37,8 @@ export default function Events() {
 function LoadingState() {
 	return (
 		<div className="grid grid-cols-1 xl:grid-cols-2 gap-4 my-5">
-			<Skeleton className="w-full h-[200px]" />
-			<Skeleton className="w-full h-[200px]" />
+			<PostFactory post={undefined} view="Event" />
+			<PostFactory post={undefined} view="Event" />
 		</div>
 	);
 }

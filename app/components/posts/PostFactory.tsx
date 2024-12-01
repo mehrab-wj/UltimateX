@@ -1,14 +1,16 @@
 import { Post } from "~/__generated__/graphql";
 import DiscussionCard from "./Discussion/DiscussionCard";
+import EventCard from "./Event/EventCard";
 
 const POST_TYPES = {
 	Discussion: "x8jlZUWAsvWkU6Q",
+	Event: "935QwHTDP8wBVCn",
 };
 
 function getPostType(post: Post): string | undefined {
 	return Object.keys(POST_TYPES).find(
 		(key) => POST_TYPES[key as keyof typeof POST_TYPES] === post.postTypeId
-	);
+	) ?? post.postTypeId;
 }
 
 export function PostFactory({
@@ -25,7 +27,9 @@ export function PostFactory({
 
 	switch (postType) {
 		case "Discussion":
-			return <DiscussionCard post={post!} />;
+			return <DiscussionCard post={post} />;
+		case "Event":
+			return <EventCard post={post} />;
 		default:
 			return <div>Undefined post type: {postType}</div>;
 	}

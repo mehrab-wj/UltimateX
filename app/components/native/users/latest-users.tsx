@@ -16,7 +16,7 @@ export default function LatestUsers() {
 	if (!data || data?.members.totalCount === 0) return null;
 
 	return (
-		<div className="mt-4 border-t border-zinc-200 pt-3">
+		<div className="mt-4 pt-3">
 			<h5 className="text-[16px] font-bold">Latest Users</h5>
 			<div className="grid grid-cols-1 mt-2">
 				{data.members.edges?.map(({ node: user }) => (
