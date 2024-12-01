@@ -1,10 +1,12 @@
 import { Post } from "~/__generated__/graphql";
 import DiscussionCard from "./Discussion/DiscussionCard";
 import EventCard from "./Event/EventCard";
+import NewsCard from "./News/NewsCard";
 
 const POST_TYPES = {
 	Discussion: "x8jlZUWAsvWkU6Q",
 	Event: "935QwHTDP8wBVCn",
+	News: "SKuOAjHb4twpdjd",
 };
 
 function getPostType(post: Post): string | undefined {
@@ -30,6 +32,8 @@ export function PostFactory({
 			return <DiscussionCard post={post} />;
 		case "Event":
 			return <EventCard post={post} />;
+		case "News":
+			return <NewsCard post={post} />;
 		default:
 			return <div>Undefined post type: {postType}</div>;
 	}

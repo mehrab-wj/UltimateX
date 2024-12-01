@@ -12,9 +12,14 @@ export const getPostUserImage = (post: Post) => {
 
 export const getThumbnail = (post: Post) => {
 	const coverImage = post.fields?.find((field) => field.key === "coverImage");
-	return coverImage?.relationEntities?.medias[0]?.__typename === "Image"
-		? coverImage.relationEntities.medias[0].url
-		: "";
+	const media =
+		coverImage?.relationEntities?.medias[0]?.__typename === "Image"
+			? coverImage.relationEntities.medias[0].url
+			: "";
+
+	if (media) return media;
+
+	return post.thumbnail?.__typename === "Image" ? post.thumbnail.url : null;
 };
 
 export const getPostLocation = (post: Post) => {
@@ -35,10 +40,11 @@ export const getEventDate = (post: Post) => {
 };
 
 export const getDiscussionContent = (post: Post) => {
-	const content = post.fields?.find((field) => field.key === "content")
-		?.value;
+	const content = post.fields?.find(
+		(field) => field.key === "content"
+	)?.value;
 
-	return content?.replaceAll('\\', "").replaceAll('"', "") ?? null;
+	return content?.replaceAll("\\", "").replaceAll('"', "") ?? null;
 };
 
 export const getPostDate = (post: Post) => {
@@ -51,4 +57,16 @@ export const getPostDate = (post: Post) => {
 		day: "numeric",
 		year: "numeric",
 	});
+};
+
+export const getPostContent = (post: Post) => {
+	return getDiscussionContent(post) ?? null;
+};
+
+export const getNewsReadingTime = (post: Post) => {
+	const content = getPostContent(post);
+
+	if (!content) return 0;
+
+	return Math.ceil(content.length / 250);
 };

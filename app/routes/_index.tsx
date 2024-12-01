@@ -7,6 +7,7 @@ import { TabsContent } from "~/components/ui/tabs";
 import EventsGallery from "~/components/events/EventsGallery";
 import SidebarContent from "~/components/native/sidebar/SidebarContent";
 import SearchArea from "~/components/native/SearchArea";
+import AllPosts from "~/components/posts/AllPosts";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -24,7 +25,7 @@ export default function Home() {
 			<div className="lg:flex lg:flex-wrap">
 				<div className="lg:w-[70%] p-5">
 					<SearchArea />
-					
+
 					<TabsSection
 						defaultValue="home"
 						tabsList={[
@@ -40,60 +41,8 @@ export default function Home() {
 					>
 						<TabsContent value="home">
 							<EventsGallery />
-							<div className="grid grid-cols-1 mt-4">
-								<PostCard
-									user={{
-										imgSrc: "/img/profile.png",
-										name: "Mehrab H",
-									}}
-									title="The 10-year-old Medium story that turned into a book deal"
-									description="Getting a book deal on a story you first published a decade ago feels even more magical."
-									category={{ title: "Fashion", url: "#" }}
-									href="/"
-									date="2024-01-01"
-									readTime="15 min"
-									save={true}
-								/>
-								<PostCard
-									user={{
-										imgSrc: "/img/profile.png",
-										name: "Mehrab H",
-									}}
-									title="The 10-year-old Medium story that turned into a book deal"
-									description="Getting a book deal on a story you first published a decade ago feels even more magical."
-									category={{ title: "Fashion", url: "#" }}
-									href="/"
-									date="2024-01-01"
-									readTime="10 min"
-									save={false}
-								/>
-								<PostCard
-									user={{
-										imgSrc: "/img/profile.png",
-										name: "Mehrab H",
-									}}
-									title="The 10-year-old Medium story that turned into a book deal"
-									description="Getting a book deal on a story you first published a decade ago feels even more magical."
-									category={{ title: "Fashion", url: "#" }}
-									href="/"
-									date="2024-01-01"
-									readTime="10 min"
-									save={false}
-								/>
-								<PostCard
-									user={{
-										imgSrc: "/img/profile.png",
-										name: "Mehrab H",
-									}}
-									title="The 10-year-old Medium story that turned into a book deal"
-									description="Getting a book deal on a story you first published a decade ago feels even more magical."
-									category={{ title: "Fashion", url: "#" }}
-									href="/"
-									date="2024-01-01"
-									readTime="10 min"
-									save={false}
-								/>
-							</div>
+
+							<AllPosts />
 						</TabsContent>
 						<TabsContent value="trending">
 							<div>Trending</div>
