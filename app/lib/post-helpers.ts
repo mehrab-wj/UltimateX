@@ -64,9 +64,14 @@ export const getPostContent = (post: Post) => {
 };
 
 export const getNewsReadingTime = (post: Post) => {
-	const content = getPostContent(post);
+	const content = stripHtmlTags(getPostContent(post));
 
 	if (!content) return 0;
 
-	return Math.ceil(content.length / 250);
+	return Math.ceil(content.length / 1500);
+};
+
+export const stripHtmlTags = (html: string | null) => {
+	if (!html) return null;
+	return html.replace(/<[^>]*>/g, "");
 };
