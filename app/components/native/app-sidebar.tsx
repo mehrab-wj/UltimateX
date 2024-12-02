@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Calendar, Home, Inbox, NotebookIcon, Search, Settings } from "lucide-react";
 import { Link, NavLink } from "react-router";
 
 import {
@@ -21,19 +21,19 @@ export function AppSidebar() {
 			icon: Home,
 		},
 		{
+			title: "Posts",
+			url: "/posts",
+			icon: NotebookIcon,
+		},
+		{
 			title: "Discussion",
-			url: "/discussions",
+			url: "/discussion",
 			icon: Inbox,
 		},
 		{
 			title: "Events",
 			url: "/events",
 			icon: Calendar,
-		},
-		{
-			title: "Notifications",
-			url: "/notifications",
-			icon: Search,
 		},
 		{
 			title: "Settings",

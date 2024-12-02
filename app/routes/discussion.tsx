@@ -1,4 +1,4 @@
-import type { Route } from "./+types/discussions";
+import type { Route } from "./+types/discussion";
 import { GET_POSTS_QUERY } from "~/queries/posts";
 import { Post } from "~/__generated__/graphql";
 import { useQuery } from "@apollo/client/index";
