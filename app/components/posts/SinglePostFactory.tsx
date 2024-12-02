@@ -1,11 +1,11 @@
 import { Post } from "~/__generated__/graphql";
-import DiscussionCard from "./Discussion/DiscussionCard";
-import EventCard from "./Event/EventCard";
-import NewsCard from "./News/NewsCard";
-import SmallPostCard from "./Custom/SmallPostCard";
 import { POST_TYPES, getPostType } from "./types/postTypes";
+import NewsCard from "./News/NewsCard";
+import DiscussionCard from "./Discussion/DiscussionCard";
+import SmallPostCard from "./Custom/SmallPostCard";
+import EventCard from "./Event/EventCard";
 
-export function PostFactory({
+export function SinglePostFactory({
 	post,
 	view = undefined,
 }: {
