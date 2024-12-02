@@ -21,7 +21,7 @@ export function PostFactory({
 	post,
 	view = undefined,
 }: {
-	post: Post | undefined;
+	post?: Post;
 	view?: keyof typeof POST_TYPES;
 }) {
 	if (!post && !view)

@@ -62,11 +62,11 @@ function EventsList({ limit = 6 }: { limit?: number }) {
 
 function LoadingState() {
 	return (
-		<div className="grid grid-cols-1 gap-4">
-			<PostFactory post={undefined} view="Discussion" />
-			<PostFactory post={undefined} view="Discussion" />
-			<PostFactory post={undefined} view="Discussion" />
-			<PostFactory post={undefined} view="Discussion" />
+		<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+			<PostFactory view="Event" />
+			<PostFactory view="Event" />
+			<PostFactory view="Event" />
+			<PostFactory view="Event" />
 		</div>
 	);
 }

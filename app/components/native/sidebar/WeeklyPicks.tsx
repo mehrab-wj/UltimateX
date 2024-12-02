@@ -1,7 +1,11 @@
 import { useQuery } from "@apollo/client/index";
 import { GET_POSTS_QUERY } from "~/queries/posts";
 import SmallPostCard from "../../posts/Custom/SmallPostCard";
-import { Post, PostListFilterByOperator, PostListOrderByEnum } from "~/__generated__/graphql";
+import {
+	Post,
+	PostListFilterByOperator,
+	PostListOrderByEnum,
+} from "~/__generated__/graphql";
 import { PostFactory } from "~/components/posts/PostFactory";
 
 export default function WeeklyPicks() {
@@ -44,5 +48,11 @@ export default function WeeklyPicks() {
 }
 
 function LoadingState() {
-	return <p>Loading...</p>;
+	return (
+		<div className="grid grid-cols-1 mt-2 gap-4">
+			<PostFactory view="Small" />
+			<PostFactory view="Small" />
+			<PostFactory view="Small" />
+		</div>
+	);
 }
