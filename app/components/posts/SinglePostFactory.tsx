@@ -4,6 +4,7 @@ import NewsCard from "./News/NewsCard";
 import DiscussionCard from "./Discussion/DiscussionCard";
 import SmallPostCard from "./Custom/SmallPostCard";
 import EventCard from "./Event/EventCard";
+import SingleNewsCard from "./News/SingleNewsCard";
 
 export function SinglePostFactory({
 	post,
@@ -23,7 +24,7 @@ export function SinglePostFactory({
 		case "Event":
 			return <EventCard post={post} />;
 		case "News":
-			return <NewsCard post={post} />;
+			return <SingleNewsCard post={post} />;
 		case "Small":
 			return <SmallPostCard post={post} />;
 		default:
