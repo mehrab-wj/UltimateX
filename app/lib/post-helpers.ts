@@ -27,6 +27,11 @@ export const getPostLocation = (post: Post) => {
 	return location?.value?.replaceAll('"', "") ?? null;
 };
 
+export const getPostLinkFromFields = (post: Post) => {
+	const link = post.fields?.find((field) => field.key === "link");
+	return link?.value?.replaceAll('"', "") ?? null;
+};
+
 export const getEventDate = (post: Post) => {
 	const date = post.fields?.find((field) => field.key === "dateTime")?.value;
 

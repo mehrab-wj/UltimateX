@@ -1,9 +1,8 @@
 import { Post } from "~/__generated__/graphql";
 import { POST_TYPES, getPostType } from "./types/postTypes";
-import NewsCard from "./News/NewsCard";
 import DiscussionCard from "./Discussion/DiscussionCard";
 import SmallPostCard from "./Custom/SmallPostCard";
-import EventCard from "./Event/EventCard";
+import SingleEventCard from "./Event/SingleEventCard";
 import SingleNewsCard from "./News/SingleNewsCard";
 
 export function SinglePostFactory({
@@ -22,7 +21,7 @@ export function SinglePostFactory({
 		case "Discussion":
 			return <DiscussionCard post={post} />;
 		case "Event":
-			return <EventCard post={post} />;
+			return <SingleEventCard post={post} />;
 		case "News":
 			return <SingleNewsCard post={post} />;
 		case "Small":

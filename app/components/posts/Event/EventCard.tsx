@@ -19,7 +19,7 @@ export default function EventCard({ post }: { post: Post | undefined }) {
 	return (
 		<article className="h-[300px] text-white relative rounded-xl overflow-hidden group">
 			<img
-				src={getThumbnail(post)}
+				src={getThumbnail(post) ?? ""}
 				alt="jungle"
 				className="h-full w-full object-cover absolute inset-0 brightness-[0.4] group-hover:brightness-[0.2] transition-all duration-300"
 			/>
