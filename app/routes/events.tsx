@@ -1,4 +1,4 @@
-import type { Route } from "./+types/discussions";
+import type { Route } from "./+types/events";
 import { GET_POSTS_QUERY } from "~/queries/posts";
 import { Post } from "~/__generated__/graphql";
 import { useQuery } from "@apollo/client/index";
@@ -8,7 +8,7 @@ import SearchArea from "~/components/native/SearchArea";
 
 export function meta({}: Route.MetaArgs) {
 	return [
-		{ title: "UltimateX - Discussions" },
+		{ title: "UltimateX - Events" },
 		{
 			name: "description",
 			content: "UltimateX, even better than BetterX.",
@@ -16,7 +16,7 @@ export function meta({}: Route.MetaArgs) {
 	];
 }
 
-export default function DiscussionsPage() {
+export default function EventsPage() {
 	return (
 		<>
 			<div className="lg:flex lg:flex-wrap">
@@ -24,7 +24,7 @@ export default function DiscussionsPage() {
 					<SearchArea />
 
 					<section className="mt-5">
-						<DiscussionsList />
+						<EventsList />
 					</section>
 				</div>
 				<div className="w-[30%] lg:block hidden h-[100vh] sticky top-0 p-4 border-l border-zinc-200 overflow-x-hidden overflow-y-auto">
@@ -35,12 +35,12 @@ export default function DiscussionsPage() {
 	);
 }
 
-function DiscussionsList({ limit = 5 }: { limit?: number }) {
+function EventsList({ limit = 6 }: { limit?: number }) {
 	const { loading, error, data } = useQuery(GET_POSTS_QUERY, {
 		variables: {
 			limit,
-			spaceIds: ["1Vtk2k8bMUMi"],
-			postTypeIds: ["x8jlZUWAsvWkU6Q"],
+			spaceIds: ["fFJEmB9V0DCc"],
+			postTypeIds: ["935QwHTDP8wBVCn"],
 			orderByString: "publishedAt",
 			reverse: true,
 			filterBy: [],
@@ -52,7 +52,7 @@ function DiscussionsList({ limit = 5 }: { limit?: number }) {
 	if (!data || data?.posts.totalCount === 0) return null;
 
 	return (
-		<div className="grid grid-cols-1 gap-4">
+		<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 			{data.posts.nodes?.map((post, i) => (
 				<PostFactory key={i} post={post as Post} />
 			))}
