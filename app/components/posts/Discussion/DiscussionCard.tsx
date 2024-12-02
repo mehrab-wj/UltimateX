@@ -11,6 +11,7 @@ import {
 import { Dialog, DialogTrigger } from "~/components/ui/dialog";
 import ShareDialog from "~/components/native/dialogs/share-dialog";
 import { Skeleton } from "~/components/ui/skeleton";
+import { Link } from "react-router";
 
 export default function DiscussionCard({ post }: { post: Post | undefined }) {
 	if (!post) return <DiscussionSkleton />;
@@ -22,35 +23,37 @@ export function DiscussionCardElement({ post }: { post: Post }) {
 	const { toast } = useToast();
 	return (
 		<div className="p-4 border rounded-xl border-zinc-200">
-			<header className="flex items-center gap-2">
-				<img
-					src={
-						getPostUserImage(post) ??
-						"https://tribe-s3-production.imgix.net/Ng1kBNQZ6XqQvxMBVtgNO?fit=max&w=200&auto=compress,format"
-					}
-					alt="profile"
-					className="w-[40px] h-[40px] rounded-full"
-				/>
-				<div className="flex flex-col">
-					<strong className="text-sm font-semibold">
-						{getPostUser(post)?.name}
-					</strong>
-					<small className="text-xs text-zinc-400">
-						{getPostDate(post)}
-					</small>
+			<Link to={post.relativeUrl ?? ""}>
+				<header className="flex items-center gap-2">
+					<img
+						src={
+							getPostUserImage(post) ??
+							"https://tribe-s3-production.imgix.net/Ng1kBNQZ6XqQvxMBVtgNO?fit=max&w=200&auto=compress,format"
+						}
+						alt="profile"
+						className="w-[40px] h-[40px] rounded-full"
+					/>
+					<div className="flex flex-col">
+						<strong className="text-sm font-semibold">
+							{getPostUser(post)?.name}
+						</strong>
+						<small className="text-xs text-zinc-400">
+							{getPostDate(post)}
+						</small>
+					</div>
+				</header>
+
+				<div className="mt-4">
+					<h3 className="font-semibold">{post.title}</h3>
+
+					<div
+						className="post-content"
+						dangerouslySetInnerHTML={{
+							__html: getDiscussionContent(post) ?? "",
+						}}
+					/>
 				</div>
-			</header>
-
-			<div className="mt-4">
-				<h3 className="font-semibold">{post.title}</h3>
-
-				<div
-					className="post-content"
-					dangerouslySetInnerHTML={{
-						__html: getDiscussionContent(post) ?? "",
-					}}
-				/>
-			</div>
+			</Link>
 
 			<footer className="flex items-center gap-2 mt-4">
 				<button
