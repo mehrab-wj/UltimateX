@@ -26,7 +26,7 @@ export default function NewsCard({ post }: { post: Post | undefined }) {
 
 	return (
 		<article className="relative rounded-xl group">
-			{thumbnail && (
+			{thumbnail ? (
 				<div className="overflow-hidden rounded-xl">
 					<img
 						src={thumbnail}
@@ -34,6 +34,8 @@ export default function NewsCard({ post }: { post: Post | undefined }) {
 						className="w-full object-cover transition-transform duration-300"
 					/>
 				</div>
+			) : (
+				<div className="w-full h-[300px] bg-gradient-to-tr from-primary to-orange-400 rounded-xl" />
 			)}
 
 			<div className="bg-black/90 rounded-b-xl absolute bottom-0 left-0 right-0 z-30 p-4 flex items-center justify-between">
