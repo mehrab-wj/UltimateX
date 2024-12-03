@@ -7,10 +7,8 @@ import { Post } from "~/__generated__/graphql";
 import { SINGLE_POST_QUERY } from "~/queries/single-post";
 import { useQuery } from "@apollo/client/index";
 
-export function meta({}: Route.MetaArgs) {
-	const { space, slug } = useParams();
-
-	const title = slug?.split("-").slice(0, -1).join(" ");
+export function meta({ params }: Route.MetaArgs) {
+	const title = params.slug?.split("-").slice(0, -1).join(" ");
 
 	return [
 		{ title: `UltimateX - ${title}` },
