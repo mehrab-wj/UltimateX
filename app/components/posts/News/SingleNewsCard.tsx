@@ -71,7 +71,9 @@ export default function SingleNewsCard({ post }: { post: Post | undefined }) {
 				/>
 			</article>
 
-			<RepliesFactory post={post} />
+			<div className="border-t border-zinc-200 pt-5">
+				<RepliesFactory post={post} />
+			</div>
 		</>
 	);
 }

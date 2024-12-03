@@ -24,38 +24,31 @@ export function SingleDiscussionCardElement({ post }: { post: Post }) {
 	const { toast } = useToast();
 	return (
 		<>
-			<div className="p-2 mb-5">
-				<Link to={post.relativeUrl ?? ""}>
-					<header className="flex items-center gap-2">
-						<img
-							src={
-								getPostUserImage(post) ??
-								"https://tribe-s3-production.imgix.net/Ng1kBNQZ6XqQvxMBVtgNO?fit=max&w=200&auto=compress,format"
-							}
-							alt="profile"
-							className="w-[40px] h-[40px] rounded-full"
-						/>
-						<div className="flex flex-col">
-							<strong className="text-sm font-semibold">
-								{getPostUser(post)?.name}
-							</strong>
-							<small className="text-xs text-zinc-400">
-								{getPostDate(post)}
-							</small>
-						</div>
-					</header>
-
-					<div className="mt-4">
-						<h3 className="font-semibold">{post.title}</h3>
-
-						<div
-							className="post-content"
-							dangerouslySetInnerHTML={{
-								__html: getDiscussionContent(post) ?? "",
-							}}
-						/>
+			<div className="mb-5">
+				<header className="flex gap-2 items-center">
+					<img
+						className="w-[45px] h-[45px] rounded-full"
+						src={getPostUserImage(post) ?? ""}
+						alt="profile"
+					/>
+					<div className="flex flex-col">
+						<span className="">{getPostUser(post)?.name}</span>
+						<small className="font-light">
+							{getPostDate(post)}
+						</small>
 					</div>
-				</Link>
+				</header>
+
+				<div className="mt-4">
+					<h3 className="font-semibold">{post.title}</h3>
+
+					<div
+						className="post-content"
+						dangerouslySetInnerHTML={{
+							__html: getDiscussionContent(post) ?? "",
+						}}
+					/>
+				</div>
 
 				<footer className="flex items-center gap-2 mt-4">
 					<button
@@ -93,7 +86,9 @@ export function SingleDiscussionCardElement({ post }: { post: Post }) {
 				</footer>
 			</div>
 
-			<RepliesFactory post={post} />
+			<div className="border-t border-zinc-200 pt-5">
+				<RepliesFactory post={post} />
+			</div>
 		</>
 	);
 }

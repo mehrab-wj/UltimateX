@@ -19,8 +19,8 @@ export default function RepliesFactory({ post }: { post: Post }) {
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
-		<div className="border border-gray-200 rounded-xl p-4">
-			<div className="flex flex-col gap-6">
+		<div className="">
+			<div className="flex flex-col gap-10">
 				{replies?.nodes?.map((reply) => (
 					<ReplyCard key={reply.id} reply={reply as Post} />
 				))}
@@ -36,7 +36,7 @@ export function ReplyCard({ reply }: { reply: Post }) {
 
 	return (
 		<div className="">
-			<div className="flex gap-2 mt-auto items-center">
+			<div className="flex gap-2 items-center">
 				<img
 					className="w-[45px] h-[45px] rounded-full"
 					src={userImage ?? ""}
@@ -53,14 +53,20 @@ export function ReplyCard({ reply }: { reply: Post }) {
 				dangerouslySetInnerHTML={{ __html: content }}
 			/>
 
-			<div className="flex items-center gap-2 justify-between mt-2">
-				<div className="flex items-center gap-2">
+			<div className="flex flex-col justify-between mt-2">
+				<div className="flex items-center gap-4">
 					<button className="flex items-center gap-1">
 						<Heart className="w-4 h-4" />
 						<span>{reply.reactionsCount}</span>
 					</button>
+					<button className="flex items-center gap-1">Reply</button>
 				</div>
 			</div>
+			{reply.repliesCount > 0 && (
+				<div className="pl-6 pt-6">
+					<RepliesFactory post={reply} />
+				</div>
+			)}
 		</div>
 	);
 }
