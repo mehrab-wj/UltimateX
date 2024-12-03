@@ -101,6 +101,9 @@ body {
 	img {
 		@apply w-full rounded-lg;
 	}
+	a {
+		@apply text-primary hover:underline;
+	}
 }
 
 li[data-sidebar="menu-item"] {

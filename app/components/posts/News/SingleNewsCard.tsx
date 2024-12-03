@@ -7,6 +7,7 @@ import {
 	getPostContent,
 } from "~/lib/post-helpers";
 import { Calendar, Heart } from "lucide-react";
+import RepliesFactory from "~/components/replies/RepliesFactory";
 
 export default function SingleNewsCard({ post }: { post: Post | undefined }) {
 	if (!post) return <NewsCardSkeleton />;
@@ -27,47 +28,51 @@ export default function SingleNewsCard({ post }: { post: Post | undefined }) {
 	}
 
 	return (
-		<article className="relative rounded-xl group">
-			{thumbnail && (
-				<div className="overflow-hidden rounded-xl">
-					<img
-						src={thumbnail}
-						alt="jungle"
-						className="w-full object-cover transition-transform duration-300"
-					/>
-				</div>
-			)}
-
-			<div className="rounded-b-xl right-0 z-30 flex items-start justify-between mt-5">
-				<div>
-					<strong className="block text-xl">
-						{post.title ?? ""}
-					</strong>
-					<small className="text-gray-600">
-						{getNewsReadingTime(post)} minutes read
-					</small>
-				</div>
-				<div className="flex flex-col gap-1">
-					<div className="flex items-center gap-1 text-sm">
-						<Calendar
-							className={`${
-								post.reactions?.[0]?.reacted
-									? "text-primary fill-primary"
-									: ""
-							} w-4 h-4`}
+		<>
+			<article className="relative rounded-xl group mb-5">
+				{thumbnail && (
+					<div className="overflow-hidden rounded-xl">
+						<img
+							src={thumbnail}
+							alt="jungle"
+							className="w-full object-cover transition-transform duration-300"
 						/>
-						<span>{getPostDate(post)}</span>
+					</div>
+				)}
+
+				<div className="rounded-b-xl right-0 z-30 flex items-start justify-between mt-5">
+					<div>
+						<strong className="block text-xl">
+							{post.title ?? ""}
+						</strong>
+						<small className="text-gray-600">
+							{getNewsReadingTime(post)} minutes read
+						</small>
+					</div>
+					<div className="flex flex-col gap-1">
+						<div className="flex items-center gap-1 text-sm">
+							<Calendar
+								className={`${
+									post.reactions?.[0]?.reacted
+										? "text-primary fill-primary"
+										: ""
+								} w-4 h-4`}
+							/>
+							<span>{getPostDate(post)}</span>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div
-				dangerouslySetInnerHTML={{
-					__html: content,
-				}}
-				className="post-content space-y-3 mt-5"
-			/>
-		</article>
+				<div
+					dangerouslySetInnerHTML={{
+						__html: content,
+					}}
+					className="post-content space-y-3 mt-5"
+				/>
+			</article>
+
+			<RepliesFactory post={post} />
+		</>
 	);
 }
 
