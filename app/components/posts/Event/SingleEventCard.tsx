@@ -58,7 +58,7 @@ export default function SingleEventCard({ post }: { post: Post | undefined }) {
 				/>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+			<div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-6">
 				<div className="border p-4 rounded-lg">
 					<a href={getPostLinkFromFields(post) ?? ""} target="_blank">
 						<Button className="block w-full" variant="default">

@@ -40,7 +40,7 @@ export default function SingleNewsCard({ post }: { post: Post | undefined }) {
 					</div>
 				)}
 
-				<div className="rounded-b-xl right-0 z-30 flex items-start justify-between mt-5">
+				<div className="rounded-b-xl right-0 z-30 flex flex-col xl:flex-row gap-2 items-start justify-between mt-5">
 					<div>
 						<strong className="block text-xl">
 							{post.title ?? ""}
