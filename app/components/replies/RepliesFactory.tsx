@@ -16,6 +16,7 @@ export default function RepliesFactory({ post }: { post: Post }) {
 	const { loading, error, replies, fetchMore } = useRepliesQuery(post);
 
 	if (loading) return loadingSkeleton(post.repliesCount);
+	if (error) return <div>Error: {error.message}</div>;
 
 	return (
 		<div className="border border-gray-200 rounded-xl p-4">
