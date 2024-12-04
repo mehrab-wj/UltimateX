@@ -21,11 +21,9 @@ import {
 	HttpLink,
 	ApolloLink,
 } from "@apollo/client/index";
-import { useEffect, useState } from "react";
-import { CREATE_GUEST_TOKEN_QUERY } from "./queries/users";
 import { Loading } from "./components/native/loading";
 import { Toaster } from "./components/ui/toaster";
-import { concatPagination } from "@apollo/client/utilities";
+import { useUserStore } from "./storages/userStore";
 
 const httpLink = new HttpLink({ uri: import.meta.env.VITE_API_URL });
 
@@ -107,16 +105,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Links />
 			</head>
 			<body>
-				<SidebarProvider className="">
-					<AppSidebar />
-					<main className="grow">
-						<header className="w-full flex justify-between items-center">
-							<SidebarTrigger className="lg:hidden w-[40px] h-[40px] ml-2 scale-150 mt-2" />
-						</header>
-						{children}
-						<Toaster />
-					</main>
-				</SidebarProvider>
+				{children}
+
 				<ScrollRestoration />
 				<Scripts />
 			</body>
@@ -125,35 +115,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	const [token, setToken] = useState<string | null>(
-		window.localStorage.getItem("token")
-	);
-
-	useEffect(() => {
-		const fetchToken = async () => {
-			const data = await client.query({
-				query: CREATE_GUEST_TOKEN_QUERY,
-				variables: {
-					networkDomain: import.meta.env.VITE_NETWORK_DOMAIN,
-				},
-			});
-
-			if (data) {
-				window.localStorage.setItem(
-					"token",
-					data.data.tokens.accessToken
-				);
-				client.resetStore();
-				setToken(data.data.tokens.accessToken);
-			}
-		};
-
-		if (!token) fetchToken();
-	}, [token]);
+	const { getToken } = useUserStore();
+	const token = getToken(client);
 
 	return (
 		<ApolloProvider client={client}>
-			{!token ? <Loading /> : <Outlet />}
+			{!token ? (
+				<Loading />
+			) : (
+				<SidebarProvider className="">
+					<AppSidebar />
+					<main className="grow">
+						<header className="w-full flex justify-between items-center">
+							<SidebarTrigger className="lg:hidden w-[40px] h-[40px] ml-2 scale-150 mt-2" />
+						</header>
+						<Outlet />
+						<Toaster />
+					</main>
+				</SidebarProvider>
+			)}
 		</ApolloProvider>
 	);
 }
