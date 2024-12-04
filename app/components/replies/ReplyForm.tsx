@@ -36,12 +36,12 @@ export function ReplyForm({
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors, isSubmitting },
+		formState: { errors },
 	} = useForm<ReplyFormData>({
 		resolver: zodResolver(replySchema),
 	});
 
-	const [addReply] = useMutation(ADD_REPLY_MUTATION, {
+	const [addReply, { loading }] = useMutation(ADD_REPLY_MUTATION, {
 		onError: (error) => {
 			toast({
 				description: error.message,
@@ -90,7 +90,7 @@ export function ReplyForm({
 					{...register("content")}
 					placeholder={placeholder}
 					className="w-full p-3 rounded-md border"
-					disabled={isSubmitting}
+					disabled={loading}
 				/>
 				{errors.content && (
 					<p className="text-red-500 text-sm mt-1">
@@ -99,12 +99,8 @@ export function ReplyForm({
 				)}
 			</div>
 			<div className="flex justify-end">
-				<Button
-					type="submit"
-					disabled={isSubmitting}
-					className="px-4 py-2"
-				>
-					{isSubmitting ? "Submitting..." : "Reply"}
+				<Button type="submit" disabled={loading} className="px-4 py-2">
+					{loading ? "....." : "Reply"}
 				</Button>
 			</div>
 		</form>
