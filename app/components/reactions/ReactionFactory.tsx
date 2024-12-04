@@ -2,7 +2,13 @@ import { Heart } from "lucide-react";
 import { Post } from "~/__generated__/graphql";
 import { useReactionHook } from "./useReactionHook";
 
-export default function ReactionFactory({ post }: { post: Post }) {
+export default function ReactionFactory({
+	post,
+	reactType = "heart",
+}: {
+	post: Post;
+	reactType?: "heart" | "+1";
+}) {
 	const { reactions, reacted, like } = useReactionHook({ post });
 
 	return (
