@@ -53,7 +53,10 @@ export function ReplyCard({ reply }: { reply: Post }) {
 			/>
 
 			<div className="flex flex-col justify-between mt-2">
-				<button className="flex items-center gap-1">Reply</button>
+				<div className="flex items-center gap-4">
+					<ReactionFactory post={reply} />
+					<button className="flex items-center gap-1">Reply</button>
+				</div>
 			</div>
 			{reply.repliesCount > 0 && (
 				<div className="pl-6 pt-6">
