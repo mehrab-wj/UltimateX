@@ -5,9 +5,11 @@ import { Button } from "~/components/ui/button";
 import { LOGIN_NETWORK_MUTATION } from "~/queries/mutations/loginNetwork";
 import { useMutation } from "@apollo/client/index";
 import { useUserStore } from "~/storages/userStore";
-import { useEffect } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
+import RegisterForm from "./RegistermForm";
 
 // Define validation schema
 const loginSchema = z.object({
@@ -17,7 +19,7 @@ const loginSchema = z.object({
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
-export default function LoginForm() {
+export default function LoginForm({showDefaultCredentials}: {showDefaultCredentials: boolean}) {
 	const { toast } = useToast();
 	const { setToken, setUser } = useUserStore();
 	
@@ -25,10 +27,18 @@ export default function LoginForm() {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset
+		reset,
+		setValue
 	} = useForm<LoginFormData>({
 		resolver: zodResolver(loginSchema),
 	});
+
+	useEffect(() => {
+		if (showDefaultCredentials) {
+			setValue('email', 'mehrab@forgelink.co');
+			setValue('password', 'UltimateX2024');
+		}
+	}, [showDefaultCredentials, setValue]);
 
 	const [loginUser, { loading }] = useMutation(LOGIN_NETWORK_MUTATION, {
 		onError: (error) => {
