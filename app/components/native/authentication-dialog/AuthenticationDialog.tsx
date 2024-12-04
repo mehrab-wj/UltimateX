@@ -4,6 +4,7 @@ import {
 	Dialog,
 	DialogContent,
 	DialogTrigger,
+	DialogTitle,
 } from "~/components/ui/dialog";
 
 import LoginForm from "./LoginForm";
@@ -16,8 +17,13 @@ export default function AuthenticationDialog() {
 			<DialogTrigger className="mt-5 border border-gray-200 p-2 rounded-xl relative overflow-hidden">
 				Login
 			</DialogTrigger>
-			<DialogContent className="pt-12">
+			<DialogContent className="">
+				<DialogTitle>
+					{tab === "login" ? "Login" : "Register"}
+				</DialogTitle>
+
 				{tab === "login" ? <LoginForm /> : <RegisterForm />}
+
 				<Button
 					variant="ghost"
 					className="text-sm"

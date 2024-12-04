@@ -61,16 +61,20 @@ export function AppSidebar() {
 						Ultimate<span className="text-primary">X</span>
 					</SidebarGroupLabel>
 					{user ? (
-						<div className="hidden -flex gap-3 mt-5 border border-gray-200 p-2 rounded-xl relative overflow-hidden">
+						<div className="flex gap-3 mt-5 border border-gray-200 p-2 rounded-xl relative overflow-hidden">
 							<img
 								className="w-[40px] h-[40px] rounded-full"
-								src="/img/profile.png"
+								src={
+									user.profilePicture?.__typename === "Image"
+										? user.profilePicture.url
+										: ""
+								}
 								alt="profile"
 							/>
 							<div className="inline-block">
-								<b className="text-[13px]">Mehrab H.</b>
+								<b className="text-[13px]">{user.name}</b>
 								<span className="text-[10px] block">
-									thisismehrab@gmail.com
+									{user.email}
 								</span>
 							</div>
 							<Link

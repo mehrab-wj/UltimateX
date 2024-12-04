@@ -24,6 +24,7 @@ import {
 import { Loading } from "./components/native/loading";
 import { Toaster } from "./components/ui/toaster";
 import { useUserStore } from "./storages/userStore";
+import { useEffect } from "react";
 
 const httpLink = new HttpLink({ uri: import.meta.env.VITE_API_URL });
 
@@ -115,25 +116,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-	const { getToken } = useUserStore();
-	const token = getToken(client);
+	const { token, loadToken, loadUser } = useUserStore();
+
+	useEffect(() => {
+		loadToken(client);
+		loadUser();
+	}, []);
 
 	return (
 		<ApolloProvider client={client}>
-			{!token ? (
-				<Loading />
-			) : (
-				<SidebarProvider className="">
-					<AppSidebar />
-					<main className="grow">
-						<header className="w-full flex justify-between items-center">
-							<SidebarTrigger className="lg:hidden w-[40px] h-[40px] ml-2 scale-150 mt-2" />
-						</header>
-						<Outlet />
-						<Toaster />
-					</main>
-				</SidebarProvider>
-			)}
+			<SidebarProvider className="">
+				<AppSidebar />
+				<main className="grow">
+					<header className="w-full flex justify-between items-center">
+						<SidebarTrigger className="lg:hidden w-[40px] h-[40px] ml-2 scale-150 mt-2" />
+					</header>
+					{!token ? <Loading /> : <Outlet />}
+					<Toaster />
+				</main>
+			</SidebarProvider>
 		</ApolloProvider>
 	);
 }
