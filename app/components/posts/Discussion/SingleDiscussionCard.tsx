@@ -11,8 +11,8 @@ import {
 import { Dialog, DialogTrigger } from "~/components/ui/dialog";
 import ShareDialog from "~/components/native/dialogs/share-dialog";
 import { Skeleton } from "~/components/ui/skeleton";
-import { Link } from "react-router";
 import RepliesFactory from "~/components/replies/RepliesFactory";
+import ReactionFactory from "~/components/reactions/ReactionFactory";
 
 export default function DiscussionCard({ post }: { post: Post | undefined }) {
 	if (!post) return <DiscussionSkleton />;
@@ -51,26 +51,7 @@ export function SingleDiscussionCardElement({ post }: { post: Post }) {
 				</div>
 
 				<footer className="flex items-center gap-2 mt-4">
-					<button
-						onClick={() => {
-							toast({
-								title: "Not allowed",
-								description:
-									"You have to be logged in to react",
-								variant: "destructive",
-							});
-						}}
-						className="flex items-center gap-1 text-sm"
-					>
-						<Heart
-							className={`${
-								post.reactions?.[0]?.reacted
-									? "text-primary fill-primary"
-									: ""
-							} w-4 h-4`}
-						/>
-						<span>{post.reactionsCount}</span>
-					</button>
+					<ReactionFactory post={post} />
 
 					<button className="flex items-center gap-1 text-sm">
 						<MessageCircle className="w-4 h-4" />

@@ -6,7 +6,7 @@ import {
 	getPostDate,
 	getPostContent,
 } from "~/lib/post-helpers";
-import { Calendar, Heart } from "lucide-react";
+import { Calendar } from "lucide-react";
 import RepliesFactory from "~/components/replies/RepliesFactory";
 
 export default function SingleNewsCard({ post }: { post: Post | undefined }) {

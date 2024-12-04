@@ -1,14 +1,13 @@
-import { Post, RepliesQuery } from "~/__generated__/graphql";
+import { Post } from "~/__generated__/graphql";
 import { useRepliesQuery } from "./hooks/useRepliesQuery";
 import { Skeleton } from "../ui/skeleton";
-import { Heart } from "lucide-react";
 import {
 	getPostContent,
 	getPostDate,
 	getPostUser,
 	getPostUserImage,
 } from "~/lib/post-helpers";
-import { Button } from "../ui/button";
+import ReactionFactory from "../reactions/ReactionFactory";
 
 export default function RepliesFactory({ post }: { post: Post }) {
 	if (post.repliesCount === 0) return null;
@@ -55,10 +54,7 @@ export function ReplyCard({ reply }: { reply: Post }) {
 
 			<div className="flex flex-col justify-between mt-2">
 				<div className="flex items-center gap-4">
-					<button className="flex items-center gap-1">
-						<Heart className="w-4 h-4" />
-						<span>{reply.reactionsCount}</span>
-					</button>
+					<ReactionFactory post={reply} />
 					<button className="flex items-center gap-1">Reply</button>
 				</div>
 			</div>

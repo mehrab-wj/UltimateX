@@ -2,25 +2,12 @@ import { Post } from "~/__generated__/graphql";
 import { Link } from "react-router";
 import { Skeleton } from "~/components/ui/skeleton";
 import {
-	getPostLocation,
 	getThumbnail,
-	getEventDate,
 	getPostUser,
 	getPostUserImage,
-	getNewsReadingTime,
 	getPostDate,
-	getPostContent,
 } from "~/lib/post-helpers";
-import {
-	Bookmark,
-	BookmarkCheck,
-	Calendar,
-	Heart,
-	MessageCircle,
-	Send,
-	TimerIcon,
-} from "lucide-react";
-import { Dialog, DialogTrigger } from "~/components/ui/dialog";
+import { MessageCircle } from "lucide-react";
 import { useToast } from "~/hooks/use-toast";
 
 export default function SmallPostCard({ post }: { post?: Post }) {

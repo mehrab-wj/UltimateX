@@ -1,18 +1,18 @@
-import { Heart, MessageCircle, Send, Share } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 import { Post } from "~/__generated__/graphql";
-import { useToast } from "~/hooks/use-toast";
 import {
 	getPostUser,
 	getPostUserImage,
 	getPostDate,
 	getDiscussionContent,
+	getPostUrl,
 } from "~/lib/post-helpers";
 
 import { Dialog, DialogTrigger } from "~/components/ui/dialog";
 import ShareDialog from "~/components/native/dialogs/share-dialog";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Link } from "react-router";
-import RepliesFactory from "~/components/replies/RepliesFactory";
+import ReactionFactory from "~/components/reactions/ReactionFactory";
 
 export default function DiscussionCard({ post }: { post: Post | undefined }) {
 	if (!post) return <DiscussionSkleton />;
@@ -21,7 +21,6 @@ export default function DiscussionCard({ post }: { post: Post | undefined }) {
 }
 
 export function DiscussionCardElement({ post }: { post: Post }) {
-	const { toast } = useToast();
 	return (
 		<div className="p-4 border rounded-xl border-zinc-200">
 			<Link to={post.relativeUrl ?? ""}>
@@ -57,25 +56,7 @@ export function DiscussionCardElement({ post }: { post: Post }) {
 			</Link>
 
 			<footer className="flex items-center gap-2 mt-4">
-				<button
-					onClick={() => {
-						toast({
-							title: "Not allowed",
-							description: "You have to be logged in to react",
-							variant: "destructive",
-						});
-					}}
-					className="flex items-center gap-1 text-sm"
-				>
-					<Heart
-						className={`${
-							post.reactions?.[0]?.reacted
-								? "text-primary fill-primary"
-								: ""
-						} w-4 h-4`}
-					/>
-					<span>{post.reactionsCount}</span>
-				</button>
+				<ReactionFactory post={post} />
 
 				<button className="flex items-center gap-1 text-sm">
 					<MessageCircle className="w-4 h-4" />
@@ -86,7 +67,7 @@ export function DiscussionCardElement({ post }: { post: Post }) {
 					<DialogTrigger>
 						<Send className="w-4 h-4" />
 					</DialogTrigger>
-					<ShareDialog url={post.url ?? ""} />
+					<ShareDialog url={getPostUrl(post)} />
 				</Dialog>
 			</footer>
 		</div>

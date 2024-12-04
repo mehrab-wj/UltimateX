@@ -1,27 +1,14 @@
 import { Post } from "~/__generated__/graphql";
 import { Link } from "react-router";
 import { Skeleton } from "~/components/ui/skeleton";
-import {
-	getPostLocation,
-	getThumbnail,
-	getEventDate,
-	getPostUser,
-	getPostUserImage,
-	getNewsReadingTime,
-} from "~/lib/post-helpers";
-import { Heart, MessageCircle, Send } from "lucide-react";
-import { Dialog, DialogTrigger } from "~/components/ui/dialog";
-import ShareDialog from "~/components/native/dialogs/share-dialog";
-import { useToast } from "~/hooks/use-toast";
+import { getThumbnail, getNewsReadingTime } from "~/lib/post-helpers";
+
+import ReactionFactory from "~/components/reactions/ReactionFactory";
+import { MessageCircle } from "lucide-react";
 
 export default function NewsCard({ post }: { post: Post | undefined }) {
 	if (!post) return <NewsCardSkeleton />;
 
-	const { toast, dismiss } = useToast();
-
-	const location = getPostLocation(post);
-	const user = getPostUser(post);
-	const userImage = getPostUserImage(post);
 	const thumbnail = getThumbnail(post);
 
 	return (
@@ -38,37 +25,19 @@ export default function NewsCard({ post }: { post: Post | undefined }) {
 				<div className="w-full h-[300px] bg-gradient-to-tr from-primary to-orange-400 rounded-xl" />
 			)}
 
-			<div className="bg-black/90 rounded-b-xl absolute bottom-0 left-0 right-0 z-30 p-4 flex items-center justify-between">
-				<Link to={post.relativeUrl ?? ""}>
+			<div className="bg-black/90 rounded-b-xl absolute bottom-0 left-0 right-0 z-10 p-4 flex items-center justify-between">
+				<div>
 					<strong className="block text-xl text-white">
 						{post.title ?? ""}
 					</strong>
 					<small className="text-gray-300">
 						{getNewsReadingTime(post)} minutes read
 					</small>
-				</Link>
-				<div className="text-white flex items-center gap-2">
-					<button
-						onClick={() => {
-							toast({
-								title: "Not allowed",
-								description:
-									"You have to be logged in to react",
-								variant: "destructive",
-							});
-							setTimeout(dismiss, 3000);
-						}}
-						className="flex items-center gap-1 text-sm"
-					>
-						<Heart
-							className={`${
-								post.reactions?.[0]?.reacted
-									? "text-primary fill-primary"
-									: ""
-							} w-4 h-4`}
-						/>
-						<span>{post.reactionsCount}</span>
-					</button>
+				</div>
+
+				<div className="text-white flex items-center gap-1">
+					<MessageCircle className="w-4 h-4" />
+					<span>{post.repliesCount}</span>
 				</div>
 			</div>
 
