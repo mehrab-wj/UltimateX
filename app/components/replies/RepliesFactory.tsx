@@ -8,22 +8,39 @@ import {
 	getPostUserImage,
 } from "~/lib/post-helpers";
 import ReactionFactory from "../reactions/ReactionFactory";
+import { ReplyForm } from "./ReplyForm";
 
-export default function RepliesFactory({ post }: { post: Post }) {
-	if (post.repliesCount === 0) return null;
-
+export default function RepliesFactory({
+	post,
+	showReplyForm = true,
+}: {
+	post: Post;
+	showReplyForm?: boolean;
+}) {
 	const { loading, error, replies, fetchMore } = useRepliesQuery(post);
 
-	if (loading) return loadingSkeleton(post.repliesCount);
+	if (loading && replies.length === 0) return loadingSkeleton(post.repliesCount);
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
 		<div className="">
 			<div className="flex flex-col gap-10">
-				{replies?.nodes?.map((reply) => (
-					<ReplyCard key={reply.id} reply={reply as Post} />
+				{replies?.map((reply) => (
+					<ReplyCard key={reply.id} reply={reply} />
 				))}
 			</div>
+
+			{showReplyForm && (
+				<div className="mt-6">
+					<h3 className="font-semibold mb-3">What's your thought?</h3>
+					<ReplyForm
+						post={post}
+						onReplySubmitted={(reply) => {
+							fetchMore({});
+						}}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }
@@ -60,7 +77,7 @@ export function ReplyCard({ reply }: { reply: Post }) {
 			</div>
 			{reply.repliesCount > 0 && (
 				<div className="pl-6 pt-6">
-					<RepliesFactory post={reply} />
+					<RepliesFactory post={reply} showReplyForm={false} />
 				</div>
 			)}
 		</div>

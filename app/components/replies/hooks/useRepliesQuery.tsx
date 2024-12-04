@@ -1,8 +1,11 @@
 import { useQuery } from "@apollo/client/index";
+import { useState } from "react";
 import { Post, PostListOrderByEnum } from "~/__generated__/graphql";
 import { REPLIES_QUERY } from "~/queries/replies";
 
 export function useRepliesQuery(post: Post) {
+	const [replies, setReplies] = useState<Post[]>([]);
+
 	const { loading, error, data, fetchMore } = useQuery(REPLIES_QUERY, {
 		variables: {
 			postId: post.id,
@@ -10,18 +13,18 @@ export function useRepliesQuery(post: Post) {
 			orderBy: PostListOrderByEnum.PublishedAt,
 			reverse: true,
 		},
+		onCompleted: (data) => {
+			setReplies(data.replies.nodes as Post[]);
+		},
 		notifyOnNetworkStatusChange: true,
 	});
 
 	return {
 		loading,
 		error,
-		replies: data?.replies,
-		fetchMore: () =>
-			fetchMore({
-				variables: {
-					after: data?.replies.pageInfo.endCursor,
-				},
-			}),
+		data,
+		replies,
+		setReplies,
+		fetchMore,
 	};
 }
