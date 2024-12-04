@@ -80,3 +80,8 @@ export const stripHtmlTags = (html: string | null) => {
 	if (!html) return null;
 	return html.replace(/<[^>]*>/g, "");
 };
+
+export function getPostUrl(post: Post) {
+	return `${import.meta.env.VITE_APP_URL}${post.relativeUrl}`;
+}
+
