@@ -29,9 +29,13 @@ export function useReactionHook({ post }: { post: Post }) {
 		},
 		onError: (error) => {
 			toast({
-				title: "Login failed",
 				description: error.message,
 				variant: "destructive",
+			});
+
+			setReactionData({
+				reactions: reactionData.reactions - 1,
+				reacted: false,
 			});
 		},
 	});
