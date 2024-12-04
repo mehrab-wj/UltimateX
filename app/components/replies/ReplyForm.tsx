@@ -15,6 +15,7 @@ interface ReplyFormProps {
 	parentId?: string; // Optional - for nested replies
 	onReplySubmitted?: (reply: Post) => void;
 	placeholder?: string;
+	hidden?: boolean;
 }
 
 // Add schema definition
@@ -26,9 +27,12 @@ type ReplyFormData = z.infer<typeof replySchema>;
 
 export function ReplyForm({
 	post,
+	hidden = false,
 	onReplySubmitted,
 	placeholder = "Write a reply...",
 }: ReplyFormProps) {
+	if (hidden) return null;
+
 	const { toast } = useToast();
 	const { user } = useUserStore();
 
@@ -68,7 +72,7 @@ export function ReplyForm({
 				postId: post.id,
 				input: {
 					postTypeId:
-						post.postType?.validReplyTypes?.[0]?.id ?? post.id,
+						post.postType?.validReplyTypes?.[0]?.id ?? post.postTypeId,
 					mappingFields: [
 						{
 							key: "content",
