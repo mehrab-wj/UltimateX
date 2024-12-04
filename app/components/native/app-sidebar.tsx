@@ -2,6 +2,7 @@ import {
 	Calendar,
 	Home,
 	Inbox,
+	LogOut,
 	NotebookIcon,
 	Search,
 	Settings,
@@ -43,11 +44,6 @@ const items = [
 		url: "/events",
 		icon: Calendar,
 	},
-	{
-		title: "Settings",
-		url: "/settings",
-		icon: Settings,
-	},
 ];
 
 export function AppSidebar() {
@@ -88,8 +84,8 @@ export function AppSidebar() {
 
 					<SidebarGroupContent className="mt-5 pt-3 border-t border-gray-200">
 						<SidebarMenu>
-							{items.map((item) => (
-								<SidebarMenuItem key={item.title}>
+							{items.map((item, i) => (
+								<SidebarMenuItem key={i}>
 									<SidebarMenuButton className="" asChild>
 										<NavLink to={item.url}>
 											<item.icon />
