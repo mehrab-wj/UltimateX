@@ -1,6 +1,9 @@
 import { Link } from "react-router";
 import { Post } from "~/__generated__/graphql";
+import ShareDialog from "~/components/native/dialogs/share-dialog";
+import { useReactionHook } from "~/components/reactions/useReactionHook";
 import { Button } from "~/components/ui/button";
+import { Dialog, DialogTrigger } from "~/components/ui/dialog";
 import { Skeleton } from "~/components/ui/skeleton";
 import {
 	getPostLocation,
@@ -10,10 +13,13 @@ import {
 	getPostUserImage,
 	getPostContent,
 	getPostLinkFromFields,
+	getPostUrl,
 } from "~/lib/post-helpers";
 
 export default function SingleEventCard({ post }: { post: Post | undefined }) {
 	if (!post) return <EventCardSkeleton />;
+
+	const { reacted, like } = useReactionHook({ post });
 
 	const location = getPostLocation(post);
 	const user = getPostUser(post);
@@ -65,14 +71,25 @@ export default function SingleEventCard({ post }: { post: Post | undefined }) {
 							RSVP
 						</Button>
 					</a>
-					<div className="flex items-center gap-2 mt-3">
-						<Button className="block w-full" variant="outline">
-							Like
-						</Button>
-						<Button className="block w-full" variant="outline">
-							Share
-						</Button>
-					</div>
+
+					<Dialog>
+						<div className="flex items-center gap-2 mt-3">
+							<Button
+								onClick={() => like()}
+								className="block w-full"
+								variant="outline"
+							>
+								Like
+							</Button>
+
+							<DialogTrigger className="w-full">
+								<Button className="w-full" variant="outline">
+									Share
+								</Button>
+							</DialogTrigger>
+							<ShareDialog url={getPostUrl(post)} />
+						</div>
+					</Dialog>
 				</div>
 
 				<div className="border p-4 rounded-lg">
