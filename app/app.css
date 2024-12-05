@@ -117,7 +117,7 @@ li[data-sidebar="menu-item"] {
 	@apply !h-1 !bg-primary;
 }
 #nprogress > div.bar > div {
-	@apply !shadow-primary;
+	@apply !shadow-none;
 }
 
 /* Daisy UI Loading */
