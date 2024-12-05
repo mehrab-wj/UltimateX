@@ -112,6 +112,14 @@ li[data-sidebar="menu-item"] {
 	}
 }
 
+/* NProgress */
+#nprogress > div.bar {
+	@apply !h-1 !bg-primary;
+}
+#nprogress > div.bar > div {
+	@apply !shadow-primary;
+}
+
 /* Daisy UI Loading */
 .loading {
 	pointer-events: none;

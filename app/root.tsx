@@ -5,6 +5,7 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useNavigation,
 } from "react-router";
 
 import type { Route } from "./+types/root";
@@ -25,6 +26,8 @@ import { Loading } from "./components/native/loading";
 import { Toaster } from "./components/ui/toaster";
 import { useUserStore } from "./storages/userStore";
 import { useEffect } from "react";
+
+import NProgress from "nprogress";
 
 const httpLink = new HttpLink({ uri: import.meta.env.VITE_API_URL });
 
@@ -91,6 +94,10 @@ export const links: Route.LinksFunction = () => [
 		href: "/ultimate-x-logo.png",
 	},
 	{ rel: "stylesheet", href: stylesheet },
+	{
+		rel: "stylesheet",
+		href: "https://unpkg.com/nprogress@0.2.0/nprogress.css",
+	},
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -117,11 +124,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
 	const { token, loadToken, loadUser } = useUserStore();
+	const navigation = useNavigation();
 
 	useEffect(() => {
+		NProgress.configure({ showSpinner: false });
+
 		loadToken(client);
 		loadUser();
 	}, []);
+
+	useEffect(() => {
+		const isNavigating = Boolean(navigation.location);
+		if (isNavigating) {
+			NProgress.start();
+		} else {
+			NProgress.done();
+		}
+
+		console.log(navigation.location, isNavigating);
+	}, [navigation.location]);
 
 	return (
 		<ApolloProvider client={client}>
