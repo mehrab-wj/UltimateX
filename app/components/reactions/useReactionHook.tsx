@@ -62,6 +62,7 @@ export function useReactionHook({ post }: { post: Post }) {
 					description: "You have to be logged in to react",
 					variant: "destructive",
 				});
+				return;
 			}
 
 			if (reactionData.reacted) {
