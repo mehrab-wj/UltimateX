@@ -1,4 +1,4 @@
-import { Post } from "~/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 import DiscussionCard from "./Discussion/DiscussionCard";
 import EventCard from "./Event/EventCard";
 import NewsCard from "./News/NewsCard";

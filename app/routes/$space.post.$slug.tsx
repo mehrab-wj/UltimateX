@@ -3,8 +3,8 @@ import type { Route } from "./+types/$space.post.$slug";
 import SidebarContent from "~/components/native/sidebar/SidebarContent";
 import SearchArea from "~/components/native/SearchArea";
 import { SinglePostFactory } from "~/components/posts/SinglePostFactory";
-import { Post } from "~/__generated__/graphql";
-import { SINGLE_POST_QUERY } from "~/queries/single-post";
+import { Post } from "~/api/__generated__/graphql";
+import { SINGLE_POST_QUERY } from "~/api/queries/single-post";
 import { useQuery } from "@apollo/client/index";
 
 export function meta({ params }: Route.MetaArgs) {

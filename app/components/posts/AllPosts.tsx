@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client/index";
-import { GET_POSTS_QUERY } from "~/queries/posts";
+import { GET_POSTS_QUERY } from "~/api/queries/posts";
 import { PostFactory } from "./PostFactory";
-import { Post, PostListOrderByEnum } from "~/__generated__/graphql";
+import { Post, PostListOrderByEnum } from "~/api/__generated__/graphql";
 import { Button } from "../ui/button";
 
 export default function AllPosts({

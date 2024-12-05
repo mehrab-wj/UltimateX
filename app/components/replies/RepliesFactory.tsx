@@ -1,4 +1,4 @@
-import { Post } from "~/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 import { useRepliesQuery } from "./hooks/useRepliesQuery";
 import { ReplyCard, RepliesSkeleton } from "./ReplyCard";
 import { ReplyForm } from "./ReplyForm";

@@ -1,6 +1,6 @@
 import type { Route } from "./+types/events";
-import { GET_POSTS_QUERY } from "~/queries/posts";
-import { Post } from "~/__generated__/graphql";
+import { GET_POSTS_QUERY } from "~/api/queries/posts";
+import { Post } from "~/api/__generated__/graphql";
 import { useQuery } from "@apollo/client/index";
 import { PostFactory } from "~/components/posts/PostFactory";
 import SidebarContent from "~/components/native/sidebar/SidebarContent";

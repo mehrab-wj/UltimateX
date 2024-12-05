@@ -1,4 +1,4 @@
-import { Post } from "~/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 
 export const POST_TYPES = {
     Discussion: "x8jlZUWAsvWkU6Q",

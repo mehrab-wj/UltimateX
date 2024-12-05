@@ -1,4 +1,4 @@
-import { gql } from "~/__generated__/gql";
+import { gql } from "~/api/__generated__/gql";
 
 export const SINGLE_POST_QUERY = gql(/* GraphQL */ `
 	query GetPost($id: ID!) {

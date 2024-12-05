@@ -1,6 +1,6 @@
-import { GET_POSTS_QUERY } from "~/queries/posts";
+import { GET_POSTS_QUERY } from "~/api/queries/posts";
 import { useQuery } from "@apollo/client/index";
-import { Post, PostListFilterByOperator } from "~/__generated__/graphql";
+import { Post, PostListFilterByOperator } from "~/api/__generated__/graphql";
 import { PostFactory } from "../posts/PostFactory";
 
 export default function Events() {

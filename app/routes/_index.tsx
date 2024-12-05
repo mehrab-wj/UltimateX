@@ -5,7 +5,7 @@ import EventsGallery from "~/components/events/EventsGallery";
 import SidebarContent from "~/components/native/sidebar/SidebarContent";
 import SearchArea from "~/components/native/SearchArea";
 import AllPosts from "~/components/posts/AllPosts";
-import { PostListOrderByEnum, TagsOrderByEnum } from "~/__generated__/graphql";
+import { PostListOrderByEnum, TagsOrderByEnum } from "~/api/__generated__/graphql";
 
 export function meta({}: Route.MetaArgs) {
 	return [

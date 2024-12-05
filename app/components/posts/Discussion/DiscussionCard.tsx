@@ -1,5 +1,5 @@
 import { MessageCircle, Send } from "lucide-react";
-import { Post } from "~/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 import {
 	getPostUser,
 	getPostUserImage,

@@ -1,4 +1,4 @@
-import { GET_TOP_MEMBERS_QUERY } from "~/queries/members";
+import { GET_TOP_MEMBERS_QUERY } from "~/api/queries/members";
 import { useQuery } from "@apollo/client/index";
 import { Skeleton } from "~/components/ui/skeleton";
 

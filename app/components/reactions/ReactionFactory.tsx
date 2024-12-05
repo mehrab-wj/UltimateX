@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import { Post } from "~/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 import { useReactionHook } from "./useReactionHook";
 
 export default function ReactionFactory({

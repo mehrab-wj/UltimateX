@@ -1,4 +1,4 @@
-import { gql } from "~/__generated__/gql";
+import { gql } from "~/api/__generated__/gql";
 
 export const ADD_REACTION_MUTATION = gql(/* GraphQL */ `
 	mutation addReaction($input: AddReactionInput!, $postId: ID!) {

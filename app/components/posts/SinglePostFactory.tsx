@@ -1,4 +1,4 @@
-import { Post } from "~/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 import { POST_TYPES, getPostType } from "./types/postTypes";
 import SingleDiscussionCard from "./Discussion/SingleDiscussionCard";
 import SmallPostCard from "./Custom/SmallPostCard";

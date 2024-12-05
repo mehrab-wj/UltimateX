@@ -1,4 +1,4 @@
-import { gql } from '~/__generated__/gql';
+import { gql } from '~/api/__generated__/gql';
 
 export const GET_TOP_MEMBERS_QUERY = gql(/* GraphQL */ `
 query Members($after: String, $before: String, $filterBy: [MemberListFilterByInput!], $limit: Int!, $offset: Int, $orderBy: String, $query: String, $reverse: Boolean, $roleIds: [ID!], $status: [MemberStatusInput!]) {

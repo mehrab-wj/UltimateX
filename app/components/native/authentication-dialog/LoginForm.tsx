@@ -2,14 +2,12 @@ import { Input } from "~/components/ui/input";
 import { useForm } from "react-hook-form";
 import { useToast } from "~/hooks/use-toast";
 import { Button } from "~/components/ui/button";
-import { LOGIN_NETWORK_MUTATION } from "~/queries/mutations/loginNetwork";
+import { LOGIN_NETWORK_MUTATION } from "~/api/queries/mutations/loginNetwork";
 import { useMutation } from "@apollo/client/index";
 import { useUserStore } from "~/storages/userStore";
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import RegisterForm from "./RegistermForm";
 
 // Define validation schema
 const loginSchema = z.object({
@@ -19,24 +17,28 @@ const loginSchema = z.object({
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
-export default function LoginForm({showDefaultCredentials}: {showDefaultCredentials: boolean}) {
+export default function LoginForm({
+	showDefaultCredentials,
+}: {
+	showDefaultCredentials: boolean;
+}) {
 	const { toast } = useToast();
 	const { setToken, setUser } = useUserStore();
-	
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		reset,
-		setValue
+		setValue,
 	} = useForm<LoginFormData>({
 		resolver: zodResolver(loginSchema),
 	});
 
 	useEffect(() => {
 		if (showDefaultCredentials) {
-			setValue('email', 'mehrab@forgelink.co');
-			setValue('password', 'UltimateX2024');
+			setValue("email", "mehrab@forgelink.co");
+			setValue("password", "UltimateX2024");
 		}
 	}, [showDefaultCredentials, setValue]);
 
@@ -78,9 +80,11 @@ export default function LoginForm({showDefaultCredentials}: {showDefaultCredenti
 					aria-invalid={!!errors.email}
 				/>
 				{errors.email && (
-					<p className="text-sm text-red-500">{errors.email.message}</p>
+					<p className="text-sm text-red-500">
+						{errors.email.message}
+					</p>
 				)}
-				
+
 				<Input
 					{...register("password")}
 					type="password"
@@ -88,15 +92,13 @@ export default function LoginForm({showDefaultCredentials}: {showDefaultCredenti
 					aria-invalid={!!errors.password}
 				/>
 				{errors.password && (
-					<p className="text-sm text-red-500">{errors.password.message}</p>
+					<p className="text-sm text-red-500">
+						{errors.password.message}
+					</p>
 				)}
 			</div>
 
-			<Button 
-				className="w-full" 
-				type="submit" 
-				disabled={loading}
-			>
+			<Button className="w-full" type="submit" disabled={loading}>
 				{loading ? <span className="loading !w-4" /> : "Login"}
 			</Button>
 		</form>

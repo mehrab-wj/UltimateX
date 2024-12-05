@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Post } from "~/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 import { Skeleton } from "~/components/ui/skeleton";
 import {
 	getPostLocation,

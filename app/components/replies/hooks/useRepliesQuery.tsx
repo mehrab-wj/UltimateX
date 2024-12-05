@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client/index";
 import { useState } from "react";
-import { Post, PostListOrderByEnum } from "~/__generated__/graphql";
-import { REPLIES_QUERY } from "~/queries/replies";
+import { Post, PostListOrderByEnum } from "~/api/__generated__/graphql";
+import { REPLIES_QUERY } from "~/api/queries/replies";
 
 export function useRepliesQuery(post: Post) {
 	const [replies, setReplies] = useState<Post[]>([]);

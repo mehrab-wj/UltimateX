@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Post } from "~/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 import {
 	getPostContent,
 	getPostDate,

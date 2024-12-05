@@ -1,11 +1,10 @@
 import { useQuery } from "@apollo/client/index";
-import { GET_POSTS_QUERY } from "~/queries/posts";
-import SmallPostCard from "../../posts/Custom/SmallPostCard";
+import { GET_POSTS_QUERY } from "~/api/queries/posts";
 import {
 	Post,
 	PostListFilterByOperator,
 	PostListOrderByEnum,
-} from "~/__generated__/graphql";
+} from "~/api/__generated__/graphql";
 import { PostFactory } from "~/components/posts/PostFactory";
 
 export default function WeeklyPicks() {

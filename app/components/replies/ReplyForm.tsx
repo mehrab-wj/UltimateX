@@ -6,8 +6,8 @@ import { Textarea } from "~/components/ui/textarea";
 import { useToast } from "~/hooks/use-toast";
 import { useUserStore } from "~/storages/userStore";
 import { useMutation } from "@apollo/client/index";
-import { ADD_REPLY_MUTATION } from "~/queries/mutations/createReply";
-import { Post, PostMappingTypeEnum } from "~/__generated__/graphql";
+import { ADD_REPLY_MUTATION } from "~/api/queries/mutations/createReply";
+import { Post, PostMappingTypeEnum } from "~/api/__generated__/graphql";
 import { Input } from "../ui/input";
 
 interface ReplyFormProps {

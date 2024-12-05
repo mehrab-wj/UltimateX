@@ -14,69 +14,15 @@ import stylesheet from "./app.css?url";
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
 import { AppSidebar } from "~/components/native/app-sidebar";
 
-import {
-	ApolloClient,
-	InMemoryCache,
-	ApolloProvider,
-	concat,
-	HttpLink,
-	ApolloLink,
-} from "@apollo/client/index";
+import { ApolloProvider } from "@apollo/client/index";
+import { client } from "./api/client";
+
 import { Loading } from "./components/native/loading";
 import { Toaster } from "./components/ui/toaster";
 import { useUserStore } from "./storages/userStore";
 import { useEffect } from "react";
 
 import NProgress from "nprogress";
-
-const httpLink = new HttpLink({ uri: import.meta.env.VITE_API_URL });
-
-const authMiddleware = new ApolloLink((operation, forward) => {
-	// add the authorization to the headers
-	operation.setContext(({ headers = {} }) => ({
-		headers: {
-			...headers,
-			Authorization: localStorage.getItem("token")
-				? `Bearer ${localStorage.getItem("token")}`
-				: null,
-		},
-	}));
-
-	return forward(operation);
-});
-
-const cache = new InMemoryCache({
-	typePolicies: {
-		Query: {
-			fields: {
-				posts: {
-					keyArgs: [
-						"spaceIds",
-						"postTypeIds",
-						"query",
-						"filterBy",
-						"orderByString",
-					],
-					merge(existing, incoming, { args }) {
-						if (!existing) return incoming;
-						if (!incoming) return existing;
-
-						return {
-							...incoming,
-							nodes: [...existing.nodes, ...incoming.nodes],
-							pageInfo: incoming.pageInfo,
-						};
-					},
-				},
-			},
-		},
-	},
-});
-
-const client = new ApolloClient({
-	cache,
-	link: concat(authMiddleware, httpLink),
-});
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -140,8 +86,6 @@ export default function App() {
 		} else {
 			NProgress.done();
 		}
-
-		console.log(navigation.location, isNavigating);
 	}, [navigation.location]);
 
 	return (

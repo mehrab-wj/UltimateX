@@ -1,4 +1,4 @@
-import { gql } from "~/__generated__/gql";
+import { gql } from "~/api/__generated__/gql";
 
 export const LOGIN_NETWORK_MUTATION = gql(/* GraphQL */ `
 	mutation LoginNetwork($usernameOrEmail: String!, $password: String!) {

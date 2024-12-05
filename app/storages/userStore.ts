@@ -1,7 +1,7 @@
 import { ApolloClient } from "@apollo/client/index";
 import { create } from "zustand";
-import { LoginNetworkMutation } from "~/__generated__/graphql";
-import { CREATE_GUEST_TOKEN_QUERY } from "~/queries/users";
+import { LoginNetworkMutation } from "~/api/__generated__/graphql";
+import { CREATE_GUEST_TOKEN_QUERY } from "~/api/queries/users";
 
 type UserStoreType = {
 	user: LoginNetworkMutation["loginNetwork"]["member"] | null;

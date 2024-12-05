@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Post, ReactionType } from "~/__generated__/graphql";
+import { Post, ReactionType } from "~/api/__generated__/graphql";
 import { useToast } from "~/hooks/use-toast";
 import { useUserStore } from "~/storages/userStore";
 import { useMutation } from "@apollo/client/index";
 import {
 	ADD_REACTION_MUTATION,
 	REMOVE_REACTION_MUTATION,
-} from "~/queries/mutations/addReaction";
+} from "~/api/queries/mutations/addReaction";
 
 export function useReactionHook({ post }: { post: Post }) {
 	const [reactionData, setReactionData] = useState({

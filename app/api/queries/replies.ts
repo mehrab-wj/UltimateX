@@ -1,4 +1,4 @@
-import { gql } from "~/__generated__/gql";
+import { gql } from "~/api/__generated__/gql";
 
 export const REPLIES_QUERY = gql(/* GraphQL */ `
 	query replies(
