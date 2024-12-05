@@ -5,7 +5,7 @@ import {
 	PostListFilterByOperator,
 	PostListOrderByEnum,
 } from "~/api/__generated__/graphql";
-import { PostFactory } from "~/components/posts/PostFactory";
+import { PostFactory } from "~/components/Post/PostFactory";
 
 export default function WeeklyPicks() {
 	const { loading, error, data } = useQuery(GET_POSTS_QUERY, {

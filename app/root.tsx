@@ -12,12 +12,12 @@ import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
 
 import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar";
-import { AppSidebar } from "~/components/native/app-sidebar";
+import AppSidebar from "~/components/Sidebar/AppSidebar";
 
 import { ApolloProvider } from "@apollo/client/index";
 import { client } from "./api/client";
 
-import { Loading } from "./components/native/loading";
+import Loading from "~/components/native/Loading";
 import { Toaster } from "./components/ui/toaster";
 import { useUserStore } from "./storages/userStore";
 import { useEffect } from "react";

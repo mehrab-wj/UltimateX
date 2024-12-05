@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Post, ReactionType } from "~/api/__generated__/graphql";
+import { Post } from "~/api/__generated__/graphql";
 import { useToast } from "~/hooks/use-toast";
 import { useUserStore } from "~/storages/userStore";
 import { useMutation } from "@apollo/client/index";

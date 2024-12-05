@@ -1,12 +1,4 @@
-import {
-	Calendar,
-	Home,
-	Inbox,
-	LogOut,
-	NotebookIcon,
-	Search,
-	Settings,
-} from "lucide-react";
+import { Calendar, GithubIcon, Home, Inbox, NotebookIcon } from "lucide-react";
 import { Link, NavLink } from "react-router";
 
 import {
@@ -21,7 +13,7 @@ import {
 } from "~/components/ui/sidebar";
 
 import { useUserStore } from "~/storages/userStore";
-import AuthenticationDialog from "./authentication-dialog/AuthenticationDialog";
+import AuthenticationDialog from "~/features/User/AuthenticationDialog/AuthenticationDialog";
 
 const items = [
 	{
@@ -46,7 +38,7 @@ const items = [
 	},
 ];
 
-export function AppSidebar() {
+export default function AppSidebar() {
 	const { user } = useUserStore();
 
 	return (
@@ -94,6 +86,18 @@ export function AppSidebar() {
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
+
+							<SidebarMenuItem>
+								<SidebarMenuButton className="" asChild>
+									<NavLink
+										to="https://github.com/mehrab-wj/UltimateX"
+										target="_blank"
+									>
+										<GithubIcon />
+										<span>Github</span>
+									</NavLink>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
 						</SidebarMenu>
 					</SidebarGroupContent>
 				</SidebarGroup>

@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { Post } from "~/api/__generated__/graphql";
-import ShareDialog from "~/components/native/dialogs/share-dialog";
-import { useReactionHook } from "~/components/reactions/useReactionHook";
+import ShareDialog from "~/components/Dialogs/ShareDialog";
+import { useReactionHook } from "~/components/Reactions/useReactionHook";
 import { Button } from "~/components/ui/button";
 import { Dialog, DialogTrigger } from "~/components/ui/dialog";
 import { Skeleton } from "~/components/ui/skeleton";

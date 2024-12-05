@@ -1,7 +1,7 @@
 import { GET_POSTS_QUERY } from "~/api/queries/posts";
 import { useQuery } from "@apollo/client/index";
 import { Post, PostListFilterByOperator } from "~/api/__generated__/graphql";
-import { PostFactory } from "../posts/PostFactory";
+import { PostFactory } from "../Post/PostFactory";
 
 export default function Events() {
 	const { loading, error, data } = useQuery(GET_POSTS_QUERY, {

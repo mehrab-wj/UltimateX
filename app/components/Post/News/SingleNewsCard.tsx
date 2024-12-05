@@ -7,7 +7,7 @@ import {
 	getPostContent,
 } from "~/lib/post-helpers";
 import { Calendar } from "lucide-react";
-import RepliesFactory from "~/components/replies/RepliesFactory";
+import RepliesFactory from "~/components/Replies/RepliesFactory";
 
 export default function SingleNewsCard({ post }: { post: Post | undefined }) {
 	if (!post) return <NewsCardSkeleton />;

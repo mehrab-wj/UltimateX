@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client/index";
 import { GET_POSTS_QUERY } from "~/api/queries/posts";
-import { PostFactory } from "./PostFactory";
+import { PostFactory } from "~/components/Post/PostFactory";
 import { Post, PostListOrderByEnum } from "~/api/__generated__/graphql";
-import { Button } from "../ui/button";
+import { Button } from "~/components/ui/button";
 
 export default function AllPosts({
 	orderBy = PostListOrderByEnum.PublishedAt,

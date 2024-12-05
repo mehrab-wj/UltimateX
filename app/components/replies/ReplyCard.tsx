@@ -6,7 +6,7 @@ import {
 	getPostUser,
 	getPostUserImage,
 } from "~/lib/post-helpers";
-import ReactionFactory from "../reactions/ReactionFactory";
+import ReactionFactory from "../Reactions/ReactionFactory";
 import { ReplyForm } from "./ReplyForm";
 import RepliesFactory from "./RepliesFactory";
 import { Skeleton } from "../ui/skeleton";

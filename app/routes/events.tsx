@@ -2,8 +2,9 @@ import type { Route } from "./+types/events";
 import { GET_POSTS_QUERY } from "~/api/queries/posts";
 import { Post } from "~/api/__generated__/graphql";
 import { useQuery } from "@apollo/client/index";
-import { PostFactory } from "~/components/posts/PostFactory";
-import SidebarContent from "~/components/native/sidebar/SidebarContent";
+import { PostFactory } from "~/components/Post/PostFactory";
+import LatestUsers from "~/features/User/LatestUsers";
+import WeeklyPicks from "~/features/Post/WeeklyPicks";
 import SearchArea from "~/components/native/SearchArea";
 
 export function meta({}: Route.MetaArgs) {
@@ -28,7 +29,8 @@ export default function EventsPage() {
 					</section>
 				</div>
 				<div className="w-[30%] lg:block hidden h-[100vh] sticky top-0 p-4 border-l border-zinc-200 overflow-x-hidden overflow-y-auto">
-					<SidebarContent />
+					<WeeklyPicks />
+					<LatestUsers />
 				</div>
 			</div>
 		</>

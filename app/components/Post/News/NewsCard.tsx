@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Skeleton } from "~/components/ui/skeleton";
 import { getThumbnail, getNewsReadingTime } from "~/lib/post-helpers";
 
-import ReactionFactory from "~/components/reactions/ReactionFactory";
+import ReactionFactory from "~/components/Reactions/ReactionFactory";
 import { MessageCircle } from "lucide-react";
 
 export default function NewsCard({ post }: { post: Post | undefined }) {

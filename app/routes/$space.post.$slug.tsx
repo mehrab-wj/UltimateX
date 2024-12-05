@@ -1,8 +1,9 @@
 import { useParams } from "react-router";
 import type { Route } from "./+types/$space.post.$slug";
-import SidebarContent from "~/components/native/sidebar/SidebarContent";
+import LatestUsers from "~/features/User/LatestUsers";
+import WeeklyPicks from "~/features/Post/WeeklyPicks";
 import SearchArea from "~/components/native/SearchArea";
-import { SinglePostFactory } from "~/components/posts/SinglePostFactory";
+import { SinglePostFactory } from "~/components/Post/SinglePostFactory";
 import { Post } from "~/api/__generated__/graphql";
 import { SINGLE_POST_QUERY } from "~/api/queries/single-post";
 import { useQuery } from "@apollo/client/index";
@@ -36,7 +37,8 @@ export default function SpacePostPage() {
 				</section>
 			</div>
 			<div className="w-[30%] lg:block hidden h-[100vh] sticky top-0 p-4 border-l border-zinc-200 overflow-x-hidden overflow-y-auto">
-				<SidebarContent />
+				<WeeklyPicks />
+				<LatestUsers />
 			</div>
 		</div>
 	);

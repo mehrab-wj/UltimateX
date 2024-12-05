@@ -1,39 +1,43 @@
-import { Heart, MessageCircle, Send, Share } from "lucide-react";
+import { MessageCircle, Send } from "lucide-react";
 import { Post } from "~/api/__generated__/graphql";
-import { useToast } from "~/hooks/use-toast";
 import {
 	getPostUser,
 	getPostUserImage,
 	getPostDate,
 	getDiscussionContent,
+	getPostUrl,
 } from "~/lib/post-helpers";
 
 import { Dialog, DialogTrigger } from "~/components/ui/dialog";
-import ShareDialog from "~/components/native/dialogs/share-dialog";
+import ShareDialog from "~/components/Dialogs/ShareDialog";
 import { Skeleton } from "~/components/ui/skeleton";
-import RepliesFactory from "~/components/replies/RepliesFactory";
-import ReactionFactory from "~/components/reactions/ReactionFactory";
+import { Link } from "react-router";
+import ReactionFactory from "~/components/Reactions/ReactionFactory";
 
 export default function DiscussionCard({ post }: { post: Post | undefined }) {
 	if (!post) return <DiscussionSkleton />;
 
-	return <SingleDiscussionCardElement post={post} />;
+	return <DiscussionCardElement post={post} />;
 }
 
-export function SingleDiscussionCardElement({ post }: { post: Post }) {
-	const { toast } = useToast();
+export function DiscussionCardElement({ post }: { post: Post }) {
 	return (
-		<>
-			<div className="mb-5">
-				<header className="flex gap-2 items-center">
+		<div className="p-4 border rounded-xl border-zinc-200">
+			<Link to={post.relativeUrl ?? ""}>
+				<header className="flex items-center gap-2">
 					<img
-						className="w-[45px] h-[45px] rounded-full"
-						src={getPostUserImage(post) ?? ""}
+						src={
+							getPostUserImage(post) ??
+							"https://tribe-s3-production.imgix.net/Ng1kBNQZ6XqQvxMBVtgNO?fit=max&w=200&auto=compress,format"
+						}
 						alt="profile"
+						className="w-[40px] h-[40px] rounded-full"
 					/>
 					<div className="flex flex-col">
-						<span className="">{getPostUser(post)?.name}</span>
-						<small className="font-light">
+						<strong className="text-sm font-semibold">
+							{getPostUser(post)?.name}
+						</strong>
+						<small className="text-xs text-zinc-400">
 							{getPostDate(post)}
 						</small>
 					</div>
@@ -49,32 +53,28 @@ export function SingleDiscussionCardElement({ post }: { post: Post }) {
 						}}
 					/>
 				</div>
+			</Link>
 
-				<footer className="flex items-center gap-2 mt-4">
-					<ReactionFactory post={post} />
+			<footer className="flex items-center gap-2 mt-4">
+				<ReactionFactory post={post} />
 
-					<button className="flex items-center gap-1 text-sm">
-						<MessageCircle className="w-4 h-4" />
-						<span>{post.repliesCount}</span>
-					</button>
+				<button className="flex items-center gap-1 text-sm">
+					<MessageCircle className="w-4 h-4" />
+					<span>{post.repliesCount}</span>
+				</button>
 
-					<Dialog>
-						<DialogTrigger>
-							<Send className="w-4 h-4" />
-						</DialogTrigger>
-						<ShareDialog url={post.url ?? ""} />
-					</Dialog>
-				</footer>
-			</div>
-
-			<div className="border-t border-zinc-200 pt-5">
-				<RepliesFactory post={post} />
-			</div>
-		</>
+				<Dialog>
+					<DialogTrigger>
+						<Send className="w-4 h-4" />
+					</DialogTrigger>
+					<ShareDialog url={getPostUrl(post)} />
+				</Dialog>
+			</footer>
+		</div>
 	);
 }
 
-function DiscussionSkleton() {
+export function DiscussionSkleton() {
 	return (
 		<div className="grid grid-cols-1 gap-4">
 			<div className="p-4 border rounded-xl border-zinc-200">
