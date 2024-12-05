@@ -52,7 +52,7 @@ function EventsList({ limit = 6 }: { limit?: number }) {
 	if (!data || data?.posts.totalCount === 0) return null;
 
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+		<div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
 			{data.posts.nodes?.map((post, i) => (
 				<PostFactory key={i} post={post as Post} />
 			))}
@@ -62,7 +62,7 @@ function EventsList({ limit = 6 }: { limit?: number }) {
 
 function LoadingState() {
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+		<div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
 			<PostFactory view="Event" />
 			<PostFactory view="Event" />
 			<PostFactory view="Event" />
