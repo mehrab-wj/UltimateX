@@ -8,6 +8,7 @@ import { useUserStore } from "~/storages/userStore";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useNavigate } from "react-router";
 
 // Define validation schema
 const loginSchema = z.object({
@@ -24,6 +25,7 @@ export default function LoginForm({
 }) {
 	const { toast } = useToast();
 	const { setToken, setUser } = useUserStore();
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -57,7 +59,9 @@ export default function LoginForm({
 				title: "Login successful",
 				description: "You are now logged in",
 			});
-			reset(); // Clear form after successful login
+
+			// Refresh the page
+			navigate(0);
 		},
 	});
 
