@@ -103,7 +103,7 @@ export default function AppSidebar() {
 
 											{window.localStorage.getItem(
 												"presentation-viewed"
-											) === "false" && (
+											) !== "true" && (
 												<span className="w-2 h-2 rounded-full bg-primary/50 animate-pulse"></span>
 											)}
 										</div>
