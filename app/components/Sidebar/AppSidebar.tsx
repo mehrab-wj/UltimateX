@@ -1,4 +1,11 @@
-import { Calendar, GithubIcon, Home, Inbox, NotebookIcon } from "lucide-react";
+import {
+	Calendar,
+	GithubIcon,
+	Home,
+	Inbox,
+	NotebookIcon,
+	Video,
+} from "lucide-react";
 import { Link, NavLink } from "react-router";
 
 import {
@@ -86,6 +93,23 @@ export default function AppSidebar() {
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							))}
+
+							<SidebarMenuItem>
+								<SidebarMenuButton className="" asChild>
+									<NavLink to="/presentation">
+										<Video />
+										<div className="w-full flex items-center justify-between">
+											<span>Presentation</span>
+
+											{window.localStorage.getItem(
+												"presentation-viewed"
+											) === "false" && (
+												<span className="w-2 h-2 rounded-full bg-primary/50 animate-pulse"></span>
+											)}
+										</div>
+									</NavLink>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
 
 							<SidebarMenuItem>
 								<SidebarMenuButton className="" asChild>

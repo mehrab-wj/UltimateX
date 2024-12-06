@@ -44,6 +44,10 @@ export const links: Route.LinksFunction = () => [
 		rel: "stylesheet",
 		href: "https://unpkg.com/nprogress@0.2.0/nprogress.css",
 	},
+	{
+		rel: "modulepreload",
+		href: "https://player.vimeo.com/api/player.js",
+	}
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -57,6 +61,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				/>
 				<Meta />
 				<Links />
+				<script src="https://player.vimeo.com/api/player.js" />
 			</head>
 			<body>
 				{children}
